@@ -5,6 +5,8 @@ import flush from 'styled-jsx/server';
 import getPageContext from '../utils/getPageContext';
 import Helmet from 'react-helmet'
 
+import { GA_TRACKING_ID } from '../lib/gtag'
+
 
 import '../style/index.scss';
 
@@ -45,6 +47,11 @@ class MyDocument extends Document {
   }
 
 
+  componentDidMount() {
+
+  }
+
+
   render() {
     const { pageContext } = this.props;
 
@@ -69,6 +76,23 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `}}
+          />
+
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />

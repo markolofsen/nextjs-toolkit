@@ -1,0 +1,28 @@
+
+/*
+$xxs-viewport: 480px;
+$xs-viewport: 600px;
+$sm-tablet-viewport: 720px;
+$sm-viewport: 840px;
+$md-viewport: 960px;
+$lg-tablet-viewport: 1024px;
+$lg-viewport: 1280px;
+$xl-viewport: 1440px;
+$xxl-viewport: 1600px;
+$xxxl-viewport: 1920px;
+*/
+
+@custom-media --xxs-max (max-width:480px);
+@custom-media --xxs-min (min-width:481px);
+
+@custom-media --xs-max (max-width:600px);
+@custom-media --xs-min (min-width:601px);
+
+@custom-media --sm-max (max-width:840px);
+@custom-media --sm-min (min-width:841px);
+
+@custom-media --md-max (max-width:960px);
+@custom-media --md-min (min-width:961px);
+
+@custom-media --lg-max (max-width:1280px);
+@custom-media --lg-min (min-width:1281px);

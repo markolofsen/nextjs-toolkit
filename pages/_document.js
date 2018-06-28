@@ -6,7 +6,7 @@ import getPageContext from '../utils/getPageContext';
 import Helmet from 'react-helmet'
 
 
-
+import '../style/index.scss';
 
 class MyDocument extends Document {
   static async getInitialProps (...args) {

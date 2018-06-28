@@ -2,7 +2,12 @@ import { Component } from 'react'
 import fetch from 'isomorphic-unfetch'
 import { format } from 'url'
 
-export default class Article extends Component {
+import withRoot from '../utils/withRoot';
+import NavWrapper from './NavWrapper/';
+
+
+
+class Article extends Component {
   static async getInitialProps ({ req, query, pathname, isVirtualCall }) {
     const url = format({ pathname, query })
 
@@ -47,21 +52,29 @@ export default class Article extends Component {
 
     return (
       <div>
-        <h1>{article.title}</h1>
-        <div>
-          <a href={`mailto:${user.email}`}>{user.name}</a>
-        </div>
-        <p>{article.body}</p>
-        <ul>
-          {comments.map(comment => (
-            <li key={comment.id}>
-              {comment.body}
-              <br />
-              By <strong>{comment.name}</strong>
-            </li>
-          ))}
-        </ul>
+        <NavWrapper>
+          <div>
+            <h1>{article.title}</h1>
+            <div>
+              <a href={`mailto:${user.email}`}>{user.name}</a>
+            </div>
+            <p>{article.body}</p>
+            <ul>
+              {comments.map(comment => (
+                <li key={comment.id}>
+                  {comment.body}
+                  <br />
+                  By <strong>{comment.name}</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </NavWrapper>
       </div>
     )
   }
 }
+
+
+
+export default withRoot(Article);

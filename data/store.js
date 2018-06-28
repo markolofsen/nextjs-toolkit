@@ -16,6 +16,9 @@ class Store {
 
   @observable now = ""
 
+
+  @observable leftMenu = true
+
   constructor() {
     console.log("new Store with: ", arguments)
   }
@@ -40,7 +43,6 @@ class Store {
       this.name = "MyName"
       this.age = 16
 
-      this.isTest = 'Server hey'
     }
     else {
       this.isServer = false
@@ -50,7 +52,6 @@ class Store {
       this.name = storeData.name
       this.age = storeData.age
 
-      this.isTest = 'Client hey'
     }
   }
 
@@ -76,6 +77,12 @@ class Store {
     setInterval(() => {
       this.now = "" + new Date().toLocaleTimeString()
     }, 1000)
+  }
+
+
+
+  @action leftMenuToggle = () => {
+    this.leftMenu = !this.leftMenu
   }
 }
 

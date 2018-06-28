@@ -21,6 +21,8 @@ import store from '../../data/store'
 
 import s from './index.scss'
 
+import LeftMenu from './LeftMenu/';
+
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -133,51 +135,23 @@ const styles = theme => ({
 	}
 });
 
-let _isServer = false
 
 @observer
 class Index extends React.Component {
 
-  // static async getInitialProps({ req }) {
-  //   _isServer = !!req
-  //   console.log(`Index page: getInitialProps isServer[${_isServer}]`)
-  //   if (_isServer) {
-  //     await store.init(true)
-  //   }
-  //
-  //   return { store }
-  // }
 
-  // constructor(props) {
-  //   super(props)
-  //   console.log("Index page: constructor isServer = ", _isServer)
-  //   if (!_isServer && !store.clientInited) {
-  //     console.log("Index page: constructor at Client, init store")
-  //     console.log(props.store)
-  //     let storeData = props.store
-  //     store.init(false, storeData)
-  //   }
-  // }
-  //
-  componentDidMount() {
-    console.log('—————————MOBX—————————')
-    console.log(store.isTest)
-    store.isTest = 'welcome new'
-    console.log(store.isTest)
+  handleDrawerOpen() {
+    store.leftMenuToggle()
   }
 
 
 	render() {
 		const {classes} = this.props;
 
-		let config = {
-			menu_left: true
-		}
-
 		return (
 			<div className={classes.root}>
 				<AppBar position="fixed" className={classNames(classes.appBar)}>
-					<Toolbar disableGutters={!config.menu_left} className={classes.guttersWrapper}>
+					<Toolbar disableGutters={!store.leftMenu} className={classes.guttersWrapper}>
 						<div className={classes.headerLogo}>
 							<IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton)}>
 								<Icon>menu_icon</Icon>
@@ -196,11 +170,11 @@ class Index extends React.Component {
 						</div>
 					</Toolbar>
 				</AppBar>
-				<Drawer variant="permanent" data-menu-drawer={config.menu_left
+				<Drawer variant="permanent" data-menu-drawer={store.leftMenu
 					? 'active'
 					: 'inactive'} classes={{
-					paper: classNames(classes.drawerPaper, !config.menu_left && classes.drawerPaperClose)
-				}} open={config.menu_left}>
+					paper: classNames(classes.drawerPaper, !store.leftMenu && classes.drawerPaperClose)
+				}} open={store.leftMenu}>
 
 					{true == false && <div className={classes.toolbar}>
 						<IconButton onClick={this.handleDrawerClose}>
@@ -211,7 +185,8 @@ class Index extends React.Component {
 						<Divider/>
 					</div>}
 
-					....
+					<LeftMenu />
+
 				</Drawer>
 				<main className={classes.content}>
 					<div className={classes.contentPage}>
@@ -230,4 +205,5 @@ Index.propTypes = {
 };
 
 
-export default withRoot(withStyles(styles)(Index));
+// export default withRoot(withStyles(styles)(Index));
+export default withStyles(styles)(Index);

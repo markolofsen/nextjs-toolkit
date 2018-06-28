@@ -1,0 +1,53 @@
+@import '../../../style/global/global.scss';
+
+.leftMenu {
+  overflow-y: auto;
+  max-height: calc(100vh - var(--topmenu-height));
+
+  /*
+  @include screen(min, md) {
+    position: fixed;
+    z-index: 99;
+    overflow: hidden;
+    width: 71px;
+  }
+   */
+
+  a {
+    text-decoration: none;
+  }
+
+  [data-menulist-submenu] {
+    [data-menulist-hint] {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-tiny);
+      padding-right: 10px;
+    }
+  }
+}
+
+
+[data-menu-drawer="active"] {
+  .leftMenu {
+    @media screen and (--md-min) {
+      width: 240px;
+    }
+    padding-top: 25px;
+  }
+}
+
+[data-menu-drawer="inactive"] {
+  .leftMenu {
+    @media screen and (--md-min) {
+      padding-top: 65px;
+    }
+  }
+
+  [data-menu-label] {
+    display: none;
+  }
+
+  [data-menulist-submenu] {
+    display: none;
+  }
+}

@@ -161,7 +161,9 @@ class Index extends React.Component {
   //
   componentDidMount() {
     console.log('———————————————————12333')
-    console.log(store)
+    console.log(store.isTest)
+    store.isTest = 'baby'
+    console.log(store.isTest)
   }
 
 
@@ -171,9 +173,6 @@ class Index extends React.Component {
 		let config = {
 			menu_left: true
 		}
-
-    console.log('———————————————————')
-    console.log(store)
 
 		return (
 			<div className={classes.root}>

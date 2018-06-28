@@ -29,6 +29,8 @@ import ComponentWithTrans from '../components/ComponentWithTrans'
 
 import Link, { prefetch } from '../components/link'
 
+import NavWrapper from './NavWrapper/';
+
 // import Router from 'next/router'
 
 // Router.beforePopState(({ url, asPath, options }) => {
@@ -98,82 +100,86 @@ class Index extends React.Component {
     const { open } = this.state;
 
     return (
-      <div className={classes.root}>
-        <Dialog open={open} onClose={this.handleClose}>
-          <DialogTitle>Super Secret Password</DialogTitle>
-          <DialogContent>
-            <DialogContentText>1-2-3-4-5</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button color="primary" onClick={this.handleClose}>
-              OK
+      <div>
+        <NavWrapper>
+          <div className={classes.root}>
+            <Dialog open={open} onClose={this.handleClose}>
+              <DialogTitle>Super Secret Password</DialogTitle>
+              <DialogContent>
+                <DialogContentText>1-2-3-4-5</DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button color="primary" onClick={this.handleClose}>
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Typography variant="display1" gutterBottom>
+              Material-UI
+            </Typography>
+            <Typography variant="subheading" gutterBottom>
+              example project
+            </Typography>
+            <Typography variant="subheading" gutterBottom>
+              isServer = {"" + store.isServer} name = {"" + store.name} age = {"" + store.age}
+            </Typography>
+            <Button variant="raised" color="secondary" onClick={this.handleClick}>
+              Open Dialog
             </Button>
-          </DialogActions>
-        </Dialog>
-        <Typography variant="display1" gutterBottom>
-          Material-UI
-        </Typography>
-        <Typography variant="subheading" gutterBottom>
-          example project
-        </Typography>
-        <Typography variant="subheading" gutterBottom>
-          isServer = {"" + store.isServer} name = {"" + store.name} age = {"" + store.age}
-        </Typography>
-        <Button variant="raised" color="secondary" onClick={this.handleClick}>
-          Open Dialog
-        </Button>
-        <br />
-        <h1>{t('welcome')}</h1>
-        <p>{t('common:integrates_react-i18next')}</p>
-        <PureComponent t={t} />
-        <ExtendedComponent />
-        <ComponentWithTrans />
-        <Link href='/page2'>
-          <a>{t('link.gotoPage2')}</a>
-        </Link>
+            <br />
+            <h1>{t('welcome')}</h1>
+            <p>{t('common:integrates_react-i18next')}</p>
+            <PureComponent t={t} />
+            <ExtendedComponent />
+            <ComponentWithTrans />
+            <Link href='/page2'>
+              <a>{t('link.gotoPage2')}</a>
+            </Link>
 
-        <br />
-        Now = {store.now}
-        <br />
-        <Link href={{ pathname: '/page2', query: { name: 'Zeit' } }}>
-          <Button variant="raised" color={store.age > 17 ? "secondary" : "primary"}>
-            页面2 age={"" + store.age}
-          </Button>
-        </Link>
-        <br />
-        Auth =<Switch
-          checked={store.isAuth}
-          onClick={(event, checked) => {
-            store.isAuth = !store.isAuth
-          }}
-          value="checkedB"
-          color="primary"
-        />
-        <br />
-        <Link href={{ pathname: '/page3', query: { name: 'Zeit' } }}>
-          <Button variant="raised" color="primary">
-            仅Auth状态才能跳转的页面Page3
-          </Button>
-        </Link>
-        <br />
-        <h1>Next.js - with data prefetch example</h1>
-        <ul>
-          <li>
-            <Link href='/article?id=1' prefetch withData>
-              <a>Article 1</a>
+            <br />
+            Now = {store.now}
+            <br />
+            <Link href={{ pathname: '/page2', query: { name: 'Zeit' } }}>
+              <Button variant="raised" color={store.age > 17 ? "secondary" : "primary"}>
+                页面2 age={"" + store.age}
+              </Button>
             </Link>
-          </li>
-          <li>
-            <Link href='/article?id=2' prefetch>
-              <a>Article 2</a>
+            <br />
+            Auth =<Switch
+              checked={store.isAuth}
+              onClick={(event, checked) => {
+                store.isAuth = !store.isAuth
+              }}
+              value="checkedB"
+              color="primary"
+            />
+            <br />
+            <Link href={{ pathname: '/page3', query: { name: 'Zeit' } }}>
+              <Button variant="raised" color="primary">
+                仅Auth状态才能跳转的页面Page3
+              </Button>
             </Link>
-          </li>
-          <li>
-            <Link href='/article?id=3' >
-              <a onMouseOver={e => prefetch('/article?id=3')} >Article 3</a>
-            </Link>
-          </li>
-        </ul>
+            <br />
+            <h1>Next.js - with data prefetch example</h1>
+            <ul>
+              <li>
+                <Link href='/article?id=1' prefetch withData>
+                  <a>Article 1</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/article?id=2' prefetch>
+                  <a>Article 2</a>
+                </Link>
+              </li>
+              <li>
+                <Link href='/article?id=3' >
+                  <a onMouseOver={e => prefetch('/article?id=3')} >Article 3</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </NavWrapper>
       </div>
     );
   }

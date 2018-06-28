@@ -67,6 +67,8 @@ class MyDocument extends Document {
 
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
           <link rel="stylesheet" href="/_next/static/style.css" />
+          <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />
@@ -109,6 +111,7 @@ MyDocument.getInitialProps = ctx => {
   return {
     ...page,
     pageContext,
+    helmet: Helmet.renderStatic(),
     styles: (
       <React.Fragment>
         <style

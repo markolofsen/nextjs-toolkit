@@ -2,6 +2,7 @@
 import Link, { prefetch } from '../components/link'
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import withRoot from '../utils/withRoot';
 import store from '../data/store'
 import { observable } from 'mobx'
@@ -76,19 +77,23 @@ class Index extends React.Component {
         />
 
         <NavWrapper>
-          <div />
+          <div>
+            Welcome to Page2
+            <br />
+            <Link href={{ pathname: '/', query: { name: 'haha' } }}>
+              <Button variant="raised" color="primary">
+                Back
+              </Button>
+            </Link>
+          </div>
         </NavWrapper>
-
-        Welcome to Page2
-        <br />
-        <Link href={{ pathname: '/', query: { name: 'haha' } }}>
-          <Button variant="raised" color="primary">
-            Back
-          </Button>
-        </Link>
       </div>
     )
   }
 }
+
+Index.propTypes = {
+	classes: PropTypes.object.isRequired,
+};
 
 export default withRoot(withStyles(styles)(Index));

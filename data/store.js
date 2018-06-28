@@ -39,6 +39,8 @@ class Store {
       //TODO: init data on server
       this.name = "MyName"
       this.age = 16
+
+      this.isTest = 'Server hey'
     }
     else {
       this.isServer = false
@@ -47,6 +49,8 @@ class Store {
       this.clientInited = true
       this.name = storeData.name
       this.age = storeData.age
+
+      this.isTest = 'Client hey'
     }
   }
 

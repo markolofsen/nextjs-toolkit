@@ -160,9 +160,9 @@ class Index extends React.Component {
   // }
   //
   componentDidMount() {
-    console.log('———————————————————12333')
+    console.log('—————————MOBX—————————')
     console.log(store.isTest)
-    store.isTest = 'baby'
+    store.isTest = 'welcome new'
     console.log(store.isTest)
   }
 

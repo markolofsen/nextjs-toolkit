@@ -1,0 +1,105 @@
+@import '../../../style/global/global.scss';
+
+
+
+.wrapper {
+    background: var(--palette-grey-300);
+
+    @include screen(min, md) {
+        padding: 30px 0;
+        max-height: 250px;
+    }
+    & [data-content-inner] {
+        & a {
+            text-decoration: none;
+            color: rgba(0,0,0, .7);
+            transition: var(--transition-2);
+        }
+        & a:hover {
+            color: var(--color-primary);
+        }
+
+        & > ul {
+            @include screen(min, md) {
+                display: flex;
+            }
+
+            & li {
+                flex: 1 1 auto;
+            }
+            & [data-li="logotype"] {
+                @include screen(max, md) {
+                    margin-bottom: 20px;
+                    padding-bottom: 10px;
+                    border-bottom: solid 1px rgba(0,0,0, .2);
+                }
+                @include screen(min, md) {
+                    min-width: 30%;
+                    max-width: 30%;
+                    margin-right: 30px;
+                }
+                & h3 {
+                    margin: 0;
+                    padding: 0;
+                    text-decoration: none;
+                    color: var(--color-text);
+                    @include screen(max, md) {
+                        font-size: 20px;
+                        font-weight: var(--font-weight-bold);
+                    }
+                    @include screen(min, md) {
+                        font-size: 30px;
+                        font-weight: var(--font-weight-thin);
+                    }
+                }
+                & p {
+                    color: rgba(0,0,0, .5);
+                }
+            }
+            & [data-li="menu"] {
+
+                display: flex;
+                justify-content: space-between;
+                @include screen(max, md) {
+                    flex-wrap: wrap;
+                }
+
+                & > ul {
+                    margin-bottom: 20px;
+                    & > li {
+                        padding: 5px 0;
+                        flex: 1 1 25%;
+                        min-width: 150px;
+                    }
+                }
+
+                & [data-el="gototop"] {
+                    flex: 1 1 25%;
+                    min-width: 150px;
+                    text-align: center;
+
+                    display: inline-block;
+                    color: var(--color-primary);
+                    border: solid 1px var(--color-primary);
+                    border-radius: var(--border-radius);
+                    padding: 4px 10px;
+                    transition: var(--transition-2);
+                    cursor: pointer;
+                }
+                & [data-el="gototop"]:hover {
+                    background: var(--color-primary);
+                    color: #fff;
+                }
+            }
+        }
+
+    }
+
+    & [data-el="copyright"] {
+        text-align: center;
+        color: rgba(0,0,0, .5);
+        font-size: var(--font-size-tiny);
+        margin: 20px 0 0;
+    }
+
+}

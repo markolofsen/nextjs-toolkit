@@ -317,6 +317,7 @@ class PagePropertyDetail extends Component {
 
 	render() {
 		const {data, reviews} = this.props
+		const {render} = this.state
 
 		// if (!data) {
 		// 	return <Preloader/>
@@ -367,6 +368,17 @@ class PagePropertyDetail extends Component {
 						</li>
 					</ul>
 
+					{!render &&
+					<ul className={s.gallerySSR}>
+						{data.images.map((image, index) => {
+							return (
+								<li key={index}>
+									<a href={image.normal}><img src={image.thumb} alt={data.title} /></a>
+								</li>
+							)
+						})}
+					</ul>}
+
 				</div>
 
 			</div>
@@ -378,4 +390,4 @@ PagePropertyDetail.propTypes = {
 	// classes: PropTypes.object.isRequired
 };
 
-export default withStyles(s)(PagePropertyDetail);
+export default PagePropertyDetail;

@@ -19,6 +19,8 @@ class Store {
 
   @observable leftMenu = true
   @observable mainTitle = 'TenerifeBook.com'
+  @observable copyrightYear = '2018'
+  @observable copyrightSlogan = 'Things to do in Tenerife'
 
   constructor() {
     console.log("new Store with: ", arguments)

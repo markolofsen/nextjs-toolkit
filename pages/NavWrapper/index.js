@@ -21,6 +21,8 @@ import store from '../../data/store'
 import Helmet from 'react-helmet'
 
 import LeftMenu from './LeftMenu/';
+import Footer from './Footer/';
+
 import s from './index.scss'
 
 // const i18next = require('i18next')
@@ -123,10 +125,11 @@ const styles = theme => ({
 		}
 	},
 
-	// .headerWrapper: {
-	//
-	// },
+	headerWrapper: {
+
+	},
 	headerLogo: {
+		cursor: 'pointer',
 		'& a': {
 			color: '#fff',
 			textDecoration: 'none'
@@ -184,11 +187,11 @@ class Index extends React.Component {
 
 			<AppBar position="fixed" className={classes.appBar}>
 					<Toolbar disableGutters={!store.leftMenu} className={classes.guttersWrapper}>
-						<div className={classes.headerLogo}>
-							<IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton)}>
+						<div className={classes.headerWrapper}>
+							<IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerOpen} className={classes.menuButton}>
 								<Icon>menu_icon</Icon>
 							</IconButton>
-							<Typography variant="title" color="inherit" noWrap>
+							<Typography variant="title" color="inherit" noWrap className={classes.headerLogo}>
 								<Link href={`/`}>
 									<span>
 										<span>{store.mainTitle}</span>
@@ -224,7 +227,7 @@ class Index extends React.Component {
 					<div className={classes.contentPage}>
 						{this.props.children}
 					</div>
-					...
+					<Footer store={store} />
 				</main>
 
 			</div>

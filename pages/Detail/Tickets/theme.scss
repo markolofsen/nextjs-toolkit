@@ -11,7 +11,7 @@
   margin: 30px 0;
 
   .ticketHeading {
-    @media screen and (--md-min) {
+    @include screen(min, md) {
       display: flex;
       flex-wrap: wrap;
     }
@@ -19,7 +19,7 @@
     flex-shrink: 0;
 
     > li {
-      @media screen and (--md-min) {
+      @include screen(min, md) {
         flex: 1 1 50%;
       }
     }
@@ -42,18 +42,18 @@
       display: flex;
       align-items: center;
       padding: 0 0 5px;
-      @media screen and (--md-max) {
+      @include screen(max, md) {
         font-size: var(--font-size-small);
       }
 
       > label {
         margin: 0;
         font-weight: var(--font-weight-semi-bold);
-        @media screen and (--md-max) {
+        @include screen(max, md) {
           min-width: 100px;
           max-width: 100px;
         }
-        @media screen and (--md-min) {
+        @include screen(min, md) {
           min-width: 150px;
           max-width: 150px;
         }
@@ -70,16 +70,16 @@
 
 .bookingForm {
   margin: 20px 0 0;
-  @media screen and (--md-min) {
+  @include screen(min, md) {
     display: flex;
     flex-wrap: wrap;
   }
 
   > li {
-    @media screen and (--md-max) {
+    @include screen(max, md) {
       padding: 0 0 10px;
     }
-    @media screen and (--md-min) {
+    @include screen(min, md) {
       flex: 1 1 auto;
       margin-left: 5px;
     }
@@ -90,21 +90,21 @@
   }
 
   [data-li="date"] {
-    @media screen and (--md-min) {
+    @include screen(min, md) {
       min-width: 120px;
       max-width: 120px;
     }
   }
 
   [data-li="time"] {
-    @media screen and (--md-min) {
+    @include screen(min, md) {
       min-width: 100px;
       max-width: 100px;
     }
   }
 
   [data-li="button"] {
-    @media screen and (--md-min) {
+    @include screen(min, md) {
       min-width: 120px;
       max-width: 120px;
     }

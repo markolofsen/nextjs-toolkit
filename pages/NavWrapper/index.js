@@ -23,7 +23,7 @@ import Helmet from 'react-helmet'
 import LeftMenu from './LeftMenu/';
 import s from './index.scss'
 
-
+// const i18next = require('i18next')
 
 
 const drawerWidth = 240;
@@ -147,6 +147,23 @@ class Index extends React.Component {
     store.leftMenuToggle()
   }
 
+	setLanguage(language) {
+		// i18next.init({
+		// 	lng: language,
+		// 	// resources: require(`json!./${language}.json`)
+		// });
+
+		// this.props.actions.changeLanguage(i18next);
+	}
+	componentWillMount() {
+	  // this.setLanguage('en');
+		// // console.log('——————')
+		// // console.log(store)
+		// console.log('——————')
+		// console.log('——————')
+		// console.log(window.location)
+	}
+
 	// componentDidMount() {
 	// 	console.log('——————')
 	// 	console.log(this.props)
@@ -155,15 +172,17 @@ class Index extends React.Component {
 	render() {
 		const {classes, _i18n, _title, _meta} = this.props;
 
+
+
 		return (
 			<div className={classes.root}>
 				<Helmet
 					htmlAttributes={{lang: _i18n ? _i18n.languages[0] : 'en'}}
-          title={`${store.mainTitle} | ${_title}`}
+          title={`${_title} | ${store.mainTitle}`}
           meta={_meta}
         />
 
-				<AppBar position="fixed" className={classNames(classes.appBar)}>
+			<AppBar position="fixed" className={classes.appBar}>
 					<Toolbar disableGutters={!store.leftMenu} className={classes.guttersWrapper}>
 						<div className={classes.headerLogo}>
 							<IconButton color="inherit" aria-label="open drawer" onClick={this.handleDrawerOpen} className={classNames(classes.menuButton)}>
@@ -172,7 +191,7 @@ class Index extends React.Component {
 							<Typography variant="title" color="inherit" noWrap>
 								<Link href={`/`}>
 									<span>
-										<span>Name</span>
+										<span>{store.mainTitle}</span>
 										<sup>(1.1)</sup>
 									</span>
 								</Link>

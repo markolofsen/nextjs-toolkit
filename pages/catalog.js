@@ -4,12 +4,16 @@ import { format } from 'url'
 
 import withRoot from '../utils/withRoot';
 import NavWrapper from './NavWrapper/';
-import Helmet from 'react-helmet'
+// import Helmet from 'react-helmet'
 
 import { withI18next } from '../lib/withI18next'
 import axios from 'axios';
+// import Link, { prefetch } from '../components/link'
+// import {Link} from '../routes'
+import ItemView from './Catalog/ItemView/';
 
-@withI18next(['home', 'common'])
+
+@withI18next(['cat'])
 class Article extends Component {
   static async getInitialProps ({ req, query, pathname, isVirtualCall }) {
     const url = format({ pathname, query })
@@ -25,16 +29,11 @@ class Article extends Component {
     }
 
     // fetch data as usual
-    const article = await axios.get('http://127.0.0.1:8000/api/catalog/tickets/list/false/?page=1').then(res => {
+    const offers = await axios.get('http://127.0.0.1:8000/api/catalog/tickets/list/false/?page=1').then(res => {
       return res.data.results
     });
 
-
-    const comments = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/1/comments`
-    ).then(response => response.json())
-
-    const props = { article, comments }
+    const props = { offers }
 
     // if the method is being called by our Link component
     // save props on sessionStorage using the full url (pathname + query)
@@ -47,32 +46,30 @@ class Article extends Component {
   }
 
 
+  componentDidMount() {
+    this.props.i18n.initialLanguage = 'en'
+  }
+
+
 
   render () {
-    const { i18n, article, comments } = this.props
+    const { i18n, t, offers } = this.props
 
     // console.log('——————')
     // console.log(this.props.i18n.languages[0])
+    // console.log(this.props)
 
     return (
       <div>
         <NavWrapper
           _i18n={i18n}
-          _title={`Catalog!`}
-          _meta={[{ property: 'og:title', content: 'Catalog!' }]}
-          >
+          _title={t('Catalog')}
+          _meta={[{ property: 'og:title', content: 'Catalog' }]} >
           <div data-content>
-
-            <ul>
-              {article.map(item => (
-                <li key={item.id}>
-                  <br />
-                  <strong>{item.title}</strong>
-                  <br />
-                  ------------------------------------------
-                </li>
-              ))}
-            </ul>
+            {t('Catalog')}
+            {offers.map((item, index) => (
+              <ItemView data={item} key={index} />
+            ))}
           </div>
         </NavWrapper>
       </div>

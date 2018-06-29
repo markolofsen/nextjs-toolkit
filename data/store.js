@@ -18,7 +18,7 @@ class Store {
 
 
   @observable leftMenu = true
-  @observable mainTitle = 'Main'
+  @observable mainTitle = 'TenerifeBook.com'
 
   constructor() {
     console.log("new Store with: ", arguments)

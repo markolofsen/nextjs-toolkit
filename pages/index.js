@@ -26,7 +26,6 @@ import ExtendedComponent from '../components/ExtendedComponent'
 import ComponentWithTrans from '../components/ComponentWithTrans'
 
 
-
 import Link, { prefetch } from '../components/link'
 
 import NavWrapper from './NavWrapper/';
@@ -54,7 +53,6 @@ const styles = theme => ({
 let _isServer = false
 
 @observer
-@withI18next(['home', 'common'])
 class Index extends React.Component {
 
   static async getInitialProps({ req }) {
@@ -189,4 +187,7 @@ Index.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withRoot(withStyles(styles)(Index));
+
+// @withI18next(['home', 'common'])
+
+export default withRoot(withI18next(['home', 'common'], { wait: true })(withStyles(styles)(Index)));

@@ -1,0 +1,129 @@
+@import '../../../style/global/global.scss';
+
+
+.itemBox {
+  display: flex;
+
+  @include screen(max, md) {
+    margin: 0 0 20px;
+    flex-wrap: wrap;
+  }
+  @include screen(min, md) {
+    padding: 30px;
+    margin: 15px 0;
+  }
+
+  & > li {
+    flex: 1 1 auto;
+  }
+
+  & > [data-li="preview"] {
+
+    @include screen(max, md) {
+      margin-bottom: 20px;
+    }
+    @include screen(min, md) {
+      min-width: 320px;
+      max-width: 320px;
+      background-color: red;
+    }
+
+
+    & img {
+      width: 100%;
+      border-radius: var(--border-radius);
+      @include screen(max, md) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+
+  & > [data-li="details"] {
+    @include screen(max, md) {
+      padding: 0 20px;
+    }
+    @include screen(min, md) {
+      padding: 20px 20px 20px;
+    }
+
+    & [data-ul="header"] {
+      @include screen(max, md) {
+        margin-bottom: 15px;
+      }
+      @include screen(min, md) {
+        display: flex;
+        justify-content: space-between;
+        // flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      & [data-el="location"] {
+        padding: 10px 0 0;
+        display: flex;
+        align-items: center;
+      }
+
+      & [data-li="price"] {
+        // color: var(--color-accent);
+        font-size: var(--font-size-big);
+        @include screen(max, md) {
+          margin-top: 15px;
+        }
+        @include screen(min, md) {
+          margin-left: 20px;
+        }
+
+        & > ul {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+
+          & > li {
+            text-align: right;
+            margin-right: 6px;
+            padding: 2px 7px;
+          }
+
+          & > li:last-child {
+            margin-right: 0;
+          }
+
+          & [data-li="countdown"] {
+            color: var(--color-accent);
+            font-size: var(--font-size-small);
+            white-space: nowrap;
+          }
+
+          & [data-li="discount"] {
+            color: var(--color-accent);
+            border: solid 1px var(--color-accent);
+            border-radius: var(--border-radius);
+            white-space: nowrap;
+          }
+
+          & [data-li="normalprice"] {
+            color: var(--color-primary);
+            border: solid 1px var(--color-primary);
+            border-radius: var(--border-radius);
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    [data-el="description"] {
+      font-style: italic;
+      color: var(--color-text-secondary);
+    }
+
+    .reviewsRating {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      & > li:nth-child(1) {
+        margin-right: 10px;
+      }
+    }
+  }
+}

@@ -1,9 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
+const withCSS = require('@zeit/next-css')
+
 const withSass = require('@zeit/next-sass')
 const autoprefixer = require('autoprefixer');
 
-module.exports = withSass({
+module.exports = withSass(withCSS({
   plugins: [
     {
       autoprefixer: {},
@@ -19,21 +21,7 @@ module.exports = withSass({
   },
 
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
-
-    // config.module.rules.push({
-    //   test: /\.scss$/,
-    //   use: [
-    //     {
-    //       loader: 'emit-file-loader',
-    //       options: {
-    //         name: 'dist/[path][name].[ext]',
-    //       },
-    //     },
-    //     'babel-loader',
-    //     'styled-jsx-css-loader',
-    //   ],
-    // })
-
+    // config.module.rules.push({ test: /\.scss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] });
 
     //MyHack: only save node_modules files in static/commons/main-[chunkhash].js
     if (!isServer && !dev) {
@@ -59,4 +47,4 @@ module.exports = withSass({
     }
     return config
   },
-});
+}));

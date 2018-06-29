@@ -17,167 +17,168 @@ body {
   * {
       box-sizing: border-box;
   }
-}
 
-ul {
-    list-style: none none;
-    margin: 0;
-    padding: 0;
-}
-
-
-ruble:after {
-    content: '₽';
-}
+  ul {
+      list-style: none none;
+      margin: 0;
+      padding: 0;
+  }
 
 
-
-/*
- * Hack, because material-ui applying own styles
- */
-[data-icon] {
-    padding-bottom: 0;
-}
-
-
-/*
- * Other...
- */
-[data-content] {
-    padding: 20px;
-}
-[data-content-inner] {
-    @media screen and (--md-max) {
-        padding: 20px;
-    }
-    @media screen and (--md-min) {
-        width: 90%;
-        max-width: 1500px;
-        margin: 0 auto;
-    }
-}
-
-[data-label] {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-tiny);
-    font-weight: var(--font-weight-thin);
-    display: block;
-}
-
-
-/*
- * LINKS
- */
-[data-link] {
-    color: var(--color-primary);
-    transition: var(--transition-2);
-    cursor: pointer;
-    text-decoration: none;
-}
-[data-link]:hover {
-    opacity: .7;
-}
-[data-link="underlined"] {
-    text-decoration: none;
-    border-bottom: solid 1px var(--color-primary);
-}
-[data-link="underlined"]:hover {
-    text-decoration: none;
-}
-[data-link-button] {
-    text-decoration: none;
-}
-[data-link-button="white"] {
-    color: #fff !important;
-    text-decoration: none !important;
-}
+  ruble:after {
+      content: '₽';
+  }
 
 
 
-[data-short] {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-[data-nowrap] {
-    white-space: nowrap;
-}
-
-[data-box] {
-    background: #fff;
-    box-shadow: var(--shadow-2p);
-    border-radius: var(--border-radius);
-}
-[data-box="new"] {
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12), var(--zdepth-shadow-2);
-    border-radius: 6px;
-}
-
-h1,h2,h3,h4,h5,h6 {
-    cursor: default;
-}
-[data-tag="h1"],
-[data-tag="h3"] {
-    font-weight: var(--font-weight-thin);
-    margin: 0;
-    padding: 0;
-    @media screen and (--md-max) {
-        font-size: 30px;
-    }
-    @media screen and (--md-min) {
-        font-size: 50px;
-    }
-}
-[data-tag="h4"] {
-    font-weight: var(--font-weight-thin);
-    margin: 0;
-    padding: 0;
-    @media screen and (--md-max) {
-        font-size: 25px;
-    }
-    @media screen and (--md-min) {
-        font-size: 40px;
-    }
-}
+  /*
+   * Hack, because material-ui applying own styles
+   */
+  [data-icon] {
+      padding-bottom: 0;
+  }
 
 
-/*
- * TEXT COLORS...
- */
-[data-color="primary"] {
-    color: var(--color-primary);
-}
-[data-color="danger"] {
-    color: var(--color-accent);
-}
-[data-color="success"] {
-    color: var(--color-success);
-}
-[data-color="mute"] {
-    color: var(--color-text-secondary);
-}
+  /*
+   * Other...
+   */
+  [data-content] {
+      padding: 20px;
+  }
+  [data-content-inner] {
+      @media screen and (--md-max) {
+          padding: 20px;
+      }
+      @media screen and (--md-min) {
+          width: 90%;
+          max-width: 1500px;
+          margin: 0 auto;
+      }
+  }
+
+  [data-label] {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-tiny);
+      font-weight: var(--font-weight-thin);
+      display: block;
+  }
+
+
+  /*
+   * LINKS
+   */
+  [data-link] {
+      color: var(--color-primary);
+      transition: var(--transition-2);
+      cursor: pointer;
+      text-decoration: none;
+  }
+  [data-link]:hover {
+      opacity: .7;
+  }
+  [data-link="underlined"] {
+      text-decoration: none;
+      border-bottom: solid 1px var(--color-primary);
+  }
+  [data-link="underlined"]:hover {
+      text-decoration: none;
+  }
+  [data-link-button] {
+      text-decoration: none;
+  }
+  [data-link-button="white"] {
+      color: #fff !important;
+      text-decoration: none !important;
+  }
 
 
 
-/*
- * ZERO FOR ORDERS
- */
-[data-zero] {
-    opacity: .5;
-    text-decoration: none;
-    transition: var(--transition-2);
-}
-[data-zero]:hover {
-    opacity: 1;
-}
+  [data-short] {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+  [data-nowrap] {
+      white-space: nowrap;
+  }
+
+  [data-box] {
+      background: #fff;
+      box-shadow: var(--shadow-2p);
+      border-radius: var(--border-radius);
+  }
+  [data-box="new"] {
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12), var(--zdepth-shadow-2);
+      border-radius: 6px;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+      cursor: default;
+  }
+  [data-tag="h1"],
+  [data-tag="h3"] {
+      font-weight: var(--font-weight-thin);
+      margin: 0;
+      padding: 0;
+      @media screen and (--md-max) {
+          font-size: 30px;
+      }
+      @media screen and (--md-min) {
+          font-size: 50px;
+      }
+  }
+  [data-tag="h4"] {
+      font-weight: var(--font-weight-thin);
+      margin: 0;
+      padding: 0;
+      @media screen and (--md-max) {
+          font-size: 25px;
+      }
+      @media screen and (--md-min) {
+          font-size: 40px;
+      }
+  }
+
+
+  /*
+   * TEXT COLORS...
+   */
+  [data-color="primary"] {
+      color: var(--color-primary);
+  }
+  [data-color="danger"] {
+      color: var(--color-accent);
+  }
+  [data-color="success"] {
+      color: var(--color-success);
+  }
+  [data-color="mute"] {
+      color: var(--color-text-secondary);
+  }
 
 
 
-/*
-Code formatter
-code {
-    background: var(--color-bg);
-    padding: 20px;
+  /*
+   * ZERO FOR ORDERS
+   */
+  [data-zero] {
+      opacity: .5;
+      text-decoration: none;
+      transition: var(--transition-2);
+  }
+  [data-zero]:hover {
+      opacity: 1;
+  }
+
+
+
+  /*
+  Code formatter
+  code {
+      background: var(--color-bg);
+      padding: 20px;
+  }
+   */
+
 }
- */

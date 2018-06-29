@@ -1,0 +1,46 @@
+@import '../../style/global/global.scss';
+
+
+
+.contentFormat {
+
+    & ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 15px 0;
+    }
+
+    li {
+        padding: 0 0 15px;
+        display: flex;
+    }
+    li:last-child {
+        padding-bottom: 0;
+    }
+
+    li:before {
+        content: "★ ";
+        font-size: 12px;
+        min-width: 30px;
+        max-width: 30px;
+        color: var(--color-primary);
+    }
+
+    [data-el="more"] {
+        margin-top: 30px;
+        > span {
+            display: inline-block;
+            padding: 5px 20px;
+            border: solid 1px var(--color-primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition-2);
+            background: var(--color-primary);
+            color: #fff;
+        }
+        > span:hover {
+            background: #fff;
+            color: var(--color-primary);
+        }
+    }
+}

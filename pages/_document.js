@@ -7,7 +7,7 @@ import Helmet from 'react-helmet'
 
 import { GA_TRACKING_ID } from '../lib/gtag'
 
-import '../style/index.scss';
+import stylesheet from '../style/index.scss';
 
 
 class MyDocument extends Document {
@@ -87,7 +87,6 @@ class MyDocument extends Document {
             gtag('config', '${GA_TRACKING_ID}');
           `}}
           />
-
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />

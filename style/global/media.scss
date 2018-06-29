@@ -1,5 +1,5 @@
 
-/*
+
 $xxs-viewport: 480px;
 $xs-viewport: 600px;
 $sm-tablet-viewport: 720px;
@@ -10,8 +10,9 @@ $lg-viewport: 1280px;
 $xl-viewport: 1440px;
 $xxl-viewport: 1600px;
 $xxxl-viewport: 1920px;
-*/
 
+/*
+@media screen and (--md-min) {}
 @custom-media --xxs-max (max-width:480px);
 @custom-media --xxs-min (min-width:481px);
 
@@ -26,3 +27,89 @@ $xxxl-viewport: 1920px;
 
 @custom-media --lg-max (max-width:1280px);
 @custom-media --lg-min (min-width:1281px);
+ */
+
+
+
+@mixin screen($screen, $media) {
+   @if $media == xxs {
+       @if $screen == max {
+           @media only screen and (max-width: $xxs-viewport) { @content; }
+       }
+       @else if $screen == min {
+           @media only screen and (min-width: $xxs-viewport + 1) { @content; }
+       }
+  }
+  @else if $media == xs {
+      @if $screen == max {
+          @media only screen and (max-width: $xs-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $xs-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == sm-tablet {
+      @if $screen == max {
+          @media only screen and (max-width: $sm-tablet-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $sm-tablet-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == sm {
+      @if $screen == max {
+          @media only screen and (max-width: $sm-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $sm-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == md {
+      @if $screen == max {
+          @media only screen and (max-width: $md-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $md-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == lg-tablet {
+      @if $screen == max {
+          @media only screen and (max-width: $lg-tablet-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $lg-tablet-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == lg {
+      @if $screen == max {
+          @media only screen and (max-width: $lg-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $lg-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == xl {
+      @if $screen == max {
+          @media only screen and (max-width: $xl-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $xl-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == xxl {
+      @if $screen == max {
+          @media only screen and (max-width: $xxl-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $xxl-viewport + 1) { @content; }
+      }
+  }
+  @else if $media == xxxl {
+      @if $screen == max {
+          @media only screen and (max-width: $xxxl-viewport) { @content; }
+      }
+      @else if $screen == min {
+          @media only screen and (min-width: $xxxl-viewport + 1) { @content; }
+      }
+  }
+}

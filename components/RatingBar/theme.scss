@@ -1,0 +1,37 @@
+@import '../../style/global/global.scss';
+
+.ratingWrapper {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-primary);
+
+  & [data-li="star"] span {
+    font-size: 18px;
+    line-height: 110%;
+  }
+
+  & [data-li="text"] {
+    margin-left: 10px;
+    color: var(--color-text-secondary);
+  }
+}
+
+[data-size="lg"] {
+  & [data-li="star"] span {
+    font-size: 30px;
+  }
+
+  & [data-li="text"] {
+    font-size: var(--font-size-big);
+  }
+}
+
+[data-size="xs"] {
+  & [data-li="star"] span {
+    font-size: var(--font-size-small);
+  }
+
+  & [data-li="text"] {
+    font-size: var(--font-size-tiny);
+  }
+}

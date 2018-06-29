@@ -7,8 +7,8 @@ import Helmet from 'react-helmet'
 
 import { GA_TRACKING_ID } from '../lib/gtag'
 
-
 import '../style/index.scss';
+
 
 class MyDocument extends Document {
   static async getInitialProps (...args) {
@@ -47,21 +47,16 @@ class MyDocument extends Document {
   }
 
 
-  componentDidMount() {
-
-  }
-
 
   render() {
     const { pageContext } = this.props;
 
     return (
-      <html lang="en" dir="ltr" {...this.helmetHtmlAttrComponents}>
+      <html dir="ltr" {...this.helmetHtmlAttrComponents}>
         <Head>
           { this.helmetJsx }
           { this.helmetHeadComponents }
 
-          <title>My page</title>
           <meta charSet="utf-8" />
 
           <meta

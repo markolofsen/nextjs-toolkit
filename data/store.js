@@ -18,6 +18,7 @@ class Store {
 
 
   @observable leftMenu = true
+  @observable mainTitle = 'Main'
 
   constructor() {
     console.log("new Store with: ", arguments)

@@ -18,10 +18,13 @@ import classNames from 'classnames';
 import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import store from '../../data/store'
-
-import s from './index.scss'
+import Helmet from 'react-helmet'
 
 import LeftMenu from './LeftMenu/';
+import s from './index.scss'
+
+
+
 
 const drawerWidth = 240;
 
@@ -136,20 +139,30 @@ const styles = theme => ({
 });
 
 
+
 @observer
 class Index extends React.Component {
-
 
   handleDrawerOpen() {
     store.leftMenuToggle()
   }
 
+	// componentDidMount() {
+	// 	console.log('——————')
+	// 	console.log(this.props)
+	// }
 
 	render() {
-		const {classes} = this.props;
+		const {classes, _i18n, _title, _meta} = this.props;
 
 		return (
 			<div className={classes.root}>
+				<Helmet
+					htmlAttributes={{lang: _i18n ? _i18n.languages[0] : 'en'}}
+          title={`${store.mainTitle} | ${_title}`}
+          meta={_meta}
+        />
+
 				<AppBar position="fixed" className={classNames(classes.appBar)}>
 					<Toolbar disableGutters={!store.leftMenu} className={classes.guttersWrapper}>
 						<div className={classes.headerLogo}>

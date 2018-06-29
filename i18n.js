@@ -13,6 +13,8 @@ const options = {
   debug: process.env.NODE_ENV !== 'production',
   saveMissing: true,
 
+  // whitelist: ['en'],
+
   interpolation: {
     escapeValue: false, // not needed for react!!
     formatSeparator: ',',

@@ -12,7 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+// import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Collapse from '@material-ui/core/Collapse';
 
 import Divider from '@material-ui/core/Divider';
@@ -67,15 +67,12 @@ class MenuGenerator extends React.Component {
 								<Collapse in={this.state.open} timeout="auto" unmountOnExit>
 									<List component="div" disablePadding>
 										{item.submenu.map((subitem, subindex) => {
-											let sublink = `/p/posts/${subitem.slug}/`
+											let sublink = `${subitem.slug}/`
 											return (
 												<div key={`subitem-${index}-${subindex}`}>
-													<Link href={sublink} data-menulist-submenu>
+													<Link href={sublink}>
 														<ListItem button dense>
 															<ListItemText primary={subitem.label}/>
-															<ListItemSecondaryAction data-menulist-hint>
-																{subitem.hint}
-															</ListItemSecondaryAction>
 														</ListItem>
 													</Link>
 												</div>
@@ -146,8 +143,8 @@ class MenuComponent extends React.Component {
 				// submenu: config.site_settings.catalog_menu,
 				submenu: [
 					{
-						label: 'Page 1',
-						slug: false,
+						label: 'Catalog 1',
+						slug: '/catalog?lng=en',
 						hint: 0
 					}, {
 						label: 'Page 2',

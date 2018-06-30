@@ -35,27 +35,8 @@ export const prefetch = async (href) => {
 
 
 
-function hrefModifier(href) {
-
-  // if(typeof window !== 'undefined' && typeof href !== 'undefined') {
-  //   if(href && typeof href !== 'string') {
-  //     console.log(href.pathname)
-  //     console.log(typeof href)
-  //
-  //     if(href.pathname && href.pathname == '/') {
-  //       // href.pathname = `/${window.localStorage.i18nextLng}`
-  //       href.pathname = `/ru`
-  //     } else {
-  //       href.pathname = `/ru${href.pathname}`
-  //     }
-  //   }
-  //   console.log(href.pathname)
-  // }
-
-  return href
-}
 // extend default next/link to customize the prefetch behaviour
-class LinkWithData extends Link {
+export default class LinkWithData extends Link {
 
   // re defined Link propTypes to add `withData`
   static propTypes = exact({
@@ -91,17 +72,10 @@ class LinkWithData extends Link {
     // prefetch with data
     // otherwise just prefetch the page
     if (this.props.withData) {
-      prefetch(hrefModifier(this.props.href))
+      prefetch(this.props.href)
       // prefetch(this.props.href)
     } else {
       super.prefetch()
     }
   }
-
-  render() {
-    return <Link {...this.props} href={hrefModifier(this.props.href)} />;
-  }
 }
-
-
-export default LinkWithData

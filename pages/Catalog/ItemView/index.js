@@ -6,6 +6,9 @@ import { withStyles } from '@material-ui/core/styles';
 // import withSSR from '../../../components/withSSR';
 // import Link from 'next/link'
 import {Link} from '../../../routes'
+import { I18n } from '../../../i18n'
+import { translate } from 'react-i18next'
+
 // import Link from '../../../components/Link';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
@@ -25,6 +28,8 @@ const styles = {
 
 }
 
+
+@translate('cat')
 class ItemView extends Component {
 
     constructor(props) {
@@ -38,7 +43,7 @@ class ItemView extends Component {
     }
 
     render() {
-        const {classes, data, discountCode} = this.props
+        const {t, classes, data, discountCode} = this.props
         const {countdown} = this.state
 
         // let routing_url = `/offer/${data.slug}`
@@ -50,7 +55,7 @@ class ItemView extends Component {
             <ul data-box className={s.itemBox}>
                 <li data-li="preview">
                     {data.image_preview &&
-                        <Link route='offer' params={{ slug: data.slug }}>
+                        <Link route='offer' params={{ lang: I18n ? I18n.language : 'en', slug: data.slug }}>
                             <img src={data.image_preview} />
                         </Link>
                     }
@@ -60,7 +65,7 @@ class ItemView extends Component {
                     <ul data-ul="header">
                         <li>
                             <Typography variant="title">
-                                <Link route='offer' params={{ slug: data.slug }}>
+                                <Link route='offer' params={{ lang: I18n ? I18n.language : 'en', slug: data.slug }}>
                                   <a data-link>{data.title}</a>
                               </Link>
                             </Typography>
@@ -89,7 +94,7 @@ class ItemView extends Component {
                                 data.bestprice && data.bestprice.price ?
                                     <ul>
                                         <li data-li="normalprice">
-                                            <NumberFormat value={data.bestprice.price} displayType={'text'} decimalScale={0} thousandSeparator={true} prefix='From € ' />
+                                            <NumberFormat value={data.bestprice.price} displayType={'text'} decimalScale={0} thousandSeparator={true} prefix={`${t('From')} €`} />
                                         </li>
                                     </ul>
                                 : ''
@@ -107,9 +112,9 @@ class ItemView extends Component {
                             <RatingBar rating={data.reviews.rating} />
                         </li>
                         <li>
-                            <Link route='offer' params={{ slug: data.slug }} data-link>
+                            <Link route='offer' params={{ lang: I18n ? I18n.language : 'en', slug: data.slug }}>
                               <a data-link>
-                                <NumberFormat value={data.reviews.counter} displayType={'text'} decimalScale={0} thousandSeparator={true} prefix='' /> reviews
+                                {t('Reviews')}
                               </a>
                             </Link>
                         </li>

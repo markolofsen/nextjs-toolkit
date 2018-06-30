@@ -5,7 +5,9 @@ import {withStyles} from '@material-ui/core/styles';
 import withRoot from '../../../utils/withRoot';
 import {connect} from 'react-redux';
 // import Link from '../../Link';
-import Link, {prefetch} from '../../../components/link'
+// import Link, {prefetch} from '../../../components/link'
+import {Link} from '../../../routes'
+import { I18n } from '../../../i18n'
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -70,11 +72,11 @@ class MenuGenerator extends React.Component {
 											let sublink = `${subitem.slug}/`
 											return (
 												<div key={`subitem-${index}-${subindex}`}>
-													<Link href={{ pathname: subitem.slug, query: {} }}>
+													<Link route='catalog' params={{ lang: I18n.language, folder: subitem.slug }}><a>
 														<ListItem button dense>
 															<ListItemText primary={subitem.label}/>
 														</ListItem>
-													</Link>
+													</a></Link>
 												</div>
 											)
 										})}
@@ -87,14 +89,14 @@ class MenuGenerator extends React.Component {
 							return (<Divider key={index}/>)
 						} else {
 							return (
-								<Link href={{ pathname: item.link, query: {} }} key={index}>
+								<Link route='catalog' params={{ lang: I18n.language, folder: item.link }}><a>
 									<ListItem button data-menulist-item>
 										{item.icon && <ListItemIcon>
 											<Icon>{item.icon}</Icon>
 										</ListItemIcon>}
 										<ListItemText primary={item.label}/>
 									</ListItem>
-								</Link>
+								</a></Link>
 							)
 						}
 					}
@@ -144,7 +146,7 @@ class MenuComponent extends React.Component {
 				submenu: [
 					{
 						label: 'Catalog 1',
-						slug: '/catalog',
+						slug: 'coool',
 						hint: 0
 					}, {
 						label: 'Page 2',

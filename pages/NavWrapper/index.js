@@ -2,7 +2,8 @@
 import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
 import withRoot from '../../utils/withRoot';
-import Link, {prefetch} from '../../components/link'
+// import Link, {prefetch} from '../../components/link'
+import L, {Link} from '../../routes'
 
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -26,7 +27,7 @@ import Footer from './Footer/';
 import s from './index.scss'
 
 // const i18next = require('i18next')
-
+import { I18n } from '../../i18n'
 
 const drawerWidth = 240;
 
@@ -151,12 +152,19 @@ class Index extends React.Component {
   }
 
 	setLanguage(language) {
-		// i18next.init({
-		// 	lng: language,
+		I18n.init({
+			lng: language,
 		// 	// resources: require(`json!./${language}.json`)
-		// });
+		});
 
 		// this.props.actions.changeLanguage(i18next);
+		// window.localStorage.i18nextLng = language
+		L.Router.pushRoute('catalog', { lang: language, folder: 'any' })
+		console.log('--------')
+		// console.log(I18n.language)
+		// console.log(L)
+		// console.log(Link)
+
 	}
 	componentWillMount() {
 	  // this.setLanguage('en');
@@ -169,7 +177,7 @@ class Index extends React.Component {
 
 	// componentDidMount() {
 	// 	console.log('——————')
-	// 	console.log(this.props)
+	// 	console.log(L.lang)
 	// }
 
 	render() {
@@ -192,12 +200,16 @@ class Index extends React.Component {
 								<Icon>menu_icon</Icon>
 							</IconButton>
 							<Typography variant="title" color="inherit" noWrap className={classes.headerLogo}>
-								<Link href={{ pathname: `/`, query: {} }}>
-									<span>
+								<Link route='index' params={{ lang: 'ru' }}>
+									<a>
+										({typeof window !== 'undefined' ? window.localStorage.i18nextLng : '?'})
 										<span>{store.mainTitle}</span>
 										<sup>(1.1)</sup>
-									</span>
+									</a>
 								</Link>
+								<span onClick={() => this.setLanguage('en')}>en</span>
+								<span onClick={() => this.setLanguage('ru')}>ru</span>
+
 							</Typography>
 						</div>
 						<div className={classes.headerToolbar}>

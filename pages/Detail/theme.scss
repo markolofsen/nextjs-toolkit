@@ -14,9 +14,6 @@
 }
 
 .contentWrapper {
-  display: flex;
-
-
   @include screen(min, md) {
     display: flex;
     justify-content: space-between;

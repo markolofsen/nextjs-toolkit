@@ -36,11 +36,11 @@ class Offer extends Component {
       }
     }
 
-    const offer = await axios.get(`http://127.0.0.1:8000/api/catalog/tickets/detail/${query.slug}/0/`).then(res => {
+    const data = await axios.get(`http://127.0.0.1:8000/api/catalog/tickets/detail/${query.slug}/0/`).then(res => {
       return res.data.results
     })
     // let offer = query.slug
-    const props = { offer }
+    const props = { data, query }
     // console.log(query.slug)
     // if the method is being called by our Link component
     // save props on sessionStorage using the full url (pathname + query)
@@ -53,19 +53,19 @@ class Offer extends Component {
   }
 
   render () {
-    const { i18n, offer } = this.props
+    const { i18n, data, query } = this.props
 
-    console.log(offer)
+    console.log(data)
 
-    if (!offer) return <h1>Post not found</h1>
+    if (!data) return <h1>Post not found</h1>
 
     // return <h1>{offer.system_name}</h1>
     return (
       <NavWrapper
         _i18n={i18n}
-        _title={offer.title}
-        _meta={[{ property: 'og:title', content: offer.title }]} >
-        <Detail data={offer} />
+        _title={data.title}
+        _meta={[{ property: 'og:title', content: data.title }]} >
+        <Detail data={data} query={query} i18n={i18n}/>
       </NavWrapper>
     )
 

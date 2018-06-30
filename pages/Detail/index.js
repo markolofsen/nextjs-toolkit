@@ -10,6 +10,9 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 // import { findDOMNode } from 'react-dom'
 import {isBrowser, isMobile} from 'react-device-detect';
+import { translate } from 'react-i18next'
+import {Link} from '../../routes'
+// import { I18n } from '../../i18n'
 
 import Preloader from '../../components/Preloader/'
 import ShowMore from '../../components/ShowMore/'
@@ -30,6 +33,9 @@ import Tickets from './Tickets/'
 
 import s from './theme.scss'
 
+
+
+@translate('cat')
 class ReviewsList extends Component {
 
 	constructor(props) {
@@ -74,7 +80,7 @@ class ReviewsList extends Component {
 
 	render() {
 
-		const {data} = this.props
+		const {data, query, t, i18n} = this.props
 
 		if (!data.rating) {
 			return <div/>
@@ -83,6 +89,10 @@ class ReviewsList extends Component {
 
 		return (
 			<div className={s.reviewsWrapper}>
+
+				<Link route='offer_reviews_all' params={{ lang: i18n ? i18n.language : 'en', slug: query.slug }}><a data-link>
+					{t('All reviews')}
+				</a></Link>
 
 				<ul className={s.reviewsTop}>
 					<li><RatingBar rating={data.rating} size="lg"/></li>
@@ -130,6 +140,9 @@ class ReviewsList extends Component {
 	}
 }
 
+
+
+@translate('cat')
 class PagePropertyDetail extends Component {
 
 	state = {
@@ -275,7 +288,7 @@ class PagePropertyDetail extends Component {
 
 	renderImagePanorama() {
 		const {allow_video} = this.state
-    const {data} = this.props
+    const {t, data} = this.props
 
 		let images = []
 		if (data.images) {
@@ -303,11 +316,11 @@ class PagePropertyDetail extends Component {
 					: s.galleryButtons}>
 					<Button variant="contained" onClick={this.openGallery}>
 						<Icon>photo_camera</Icon>
-						Show photos
+						{t('Show photos')}
 					</Button>
 					{data.video && <Button variant="contained" onClick={(event) => this.playVideo(event)}>
 						<Icon>play_arrow</Icon>
-						Play video
+						{t('Play video')}
 					</Button>}
 				</div>
 
@@ -316,7 +329,7 @@ class PagePropertyDetail extends Component {
 	}
 
 	render() {
-		const {data, reviews} = this.props
+		const {data, reviews, query, i18n} = this.props
 		const {render} = this.state
 
 		// if (!data) {
@@ -364,7 +377,7 @@ class PagePropertyDetail extends Component {
 
 						</li>
 						<li data-li="right">
-							<ReviewsList data={data.reviews}/>
+							<ReviewsList data={data.reviews} query={query} i18n={i18n}/>
 						</li>
 					</ul>
 

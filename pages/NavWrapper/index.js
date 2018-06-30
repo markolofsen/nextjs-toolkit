@@ -1,7 +1,6 @@
 // import Link from 'next/link'
-import Button from '@material-ui/core/Button';
 import {withStyles} from '@material-ui/core/styles';
-import withRoot from '../../utils/withRoot';
+// import withRoot from '../../utils/withRoot';
 // import Link, {prefetch} from '../../components/link'
 import L, {Link} from '../../routes'
 
@@ -11,8 +10,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -147,6 +149,10 @@ const styles = theme => ({
 @observer
 class Index extends React.Component {
 
+	state = {
+    anchorEl: null,
+  };
+
   handleDrawerOpen() {
     store.leftMenuToggle()
   }
@@ -164,6 +170,7 @@ class Index extends React.Component {
 		// console.log(I18n.language)
 		// console.log(L)
 		// console.log(Link)
+		this.handleClose()
 
 	}
 	componentWillMount() {
@@ -179,20 +186,31 @@ class Index extends React.Component {
 	// 	console.log('——————')
 	// 	console.log(L.lang)
 	// }
+	// c() {
+	// 	console.log('--------')
+	// 	store.loadSettings()
+	// }
+
+
+	handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
 
 	render() {
 		const {classes, _i18n, _title, _meta} = this.props;
-
-
+		const { anchorEl } = this.state;
 
 		return (
 			<div className={classes.root}>
 				<Helmet
 					htmlAttributes={{lang: _i18n ? _i18n.languages[0] : 'en'}}
-          title={`${_title} | ${store.mainTitle}`}
+          title={`${_title} | ${store.settings.slogan}`}
           meta={_meta}
         />
-
 			<AppBar position="fixed" className={classes.appBar}>
 					<Toolbar disableGutters={!store.leftMenu} className={classes.guttersWrapper}>
 						<div className={classes.headerWrapper}>
@@ -203,17 +221,30 @@ class Index extends React.Component {
 								<Link route='index' params={{ lang: 'ru' }}>
 									<a>
 										({typeof window !== 'undefined' ? window.localStorage.i18nextLng : '?'})
-										<span>{store.mainTitle}</span>
+										<span>{store.settings.sitename}</span>
 										<sup>(1.1)</sup>
 									</a>
 								</Link>
-								<span onClick={() => this.setLanguage('en')}>en</span>
-								<span onClick={() => this.setLanguage('ru')}>ru</span>
-
 							</Typography>
 						</div>
 						<div className={classes.headerToolbar}>
-							...
+							<Button
+			          aria-owns={anchorEl ? 'language-menu' : null}
+			          aria-haspopup="true"
+			          onClick={this.handleClick}
+								color="inherit" >
+								<Icon style={{marginRight: 5}}>language</Icon>
+			          {I18n.language}
+			        </Button>
+			        <Menu
+			          id="language-menu"
+			          anchorEl={anchorEl}
+			          open={Boolean(anchorEl)}
+			          onClose={this.handleClose}>
+			          <MenuItem onClick={() => this.setLanguage('en')}>English</MenuItem>
+							<MenuItem onClick={() => this.setLanguage('ru')}>Russian</MenuItem>
+			        </Menu>
+
 						</div>
 					</Toolbar>
 				</AppBar>
@@ -232,12 +263,12 @@ class Index extends React.Component {
 						<Divider/>
 					</div>}
 
-					<LeftMenu />
+					<LeftMenu {...store} />
 
 				</Drawer>
 				<main className={classes.content}>
 					<div className={classes.contentPage}>
-						{this.props.children}
+							{this.props.children}
 					</div>
 					<Footer store={store} />
 				</main>
@@ -254,3 +285,4 @@ Index.propTypes = {
 
 // export default withRoot(withStyles(styles)(Index));
 export default withStyles(styles)(Index);
+// export default withRoot(withStyles(styles)(Index));

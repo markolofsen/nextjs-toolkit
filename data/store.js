@@ -1,4 +1,6 @@
 import { action, observable } from 'mobx'
+import axios from 'axios';
+
 
 class Store {
   @observable isServer = false
@@ -18,11 +20,15 @@ class Store {
 
 
   @observable leftMenu = true
-  @observable mainTitle = 'TenerifeBook.com'
-  @observable copyrightYear = '2018'
-  @observable copyrightSlogan = 'Things to do in Tenerife'
+  @observable settings = false
+
+  // fetch data
+  @action async loadSettings() {
+    this.settings = await axios.get(`http://127.0.0.1:8000/api/system/settings/`).then(res => res.data.results)
+  }
 
   constructor() {
+    this.loadSettings()
     console.log("new Store with: ", arguments)
   }
 
@@ -81,7 +87,6 @@ class Store {
       this.now = "" + new Date().toLocaleTimeString()
     }, 1000)
   }
-
 
 
   @action leftMenuToggle = () => {

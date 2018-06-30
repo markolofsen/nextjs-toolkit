@@ -1,0 +1,6 @@
+{
+  "integrates_react-i18next": "integrates_react-i18next",
+  "pureComponent": "pureComponent",
+  "extendedComponent": "extendedComponent",
+  "transComponent": "Alternatively, you can use <1>Trans</1> component."
+}

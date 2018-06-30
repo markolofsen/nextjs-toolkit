@@ -20,9 +20,9 @@ export default class Footer extends Component {
 					<ul>
 						<li data-li="logotype">
 							<h3>
-								{store.mainTitle}
+								{store.settings.sitename}
 							</h3>
-							<p>{store.copyrightSlogan}</p>
+							<p>{store.settings.slogan}</p>
 						</li>
 						<li data-li="menu">
 							<ul>
@@ -49,7 +49,7 @@ export default class Footer extends Component {
 						</li>
 					</ul>
 					<div data-el="copyright">
-            {store.mainTitle} — registered trademark, © {store.copyrightYear}
+            {store.settings.sitename} — registered trademark, © {store.settings.year}
 					</div>
 				</div>
 			</div>

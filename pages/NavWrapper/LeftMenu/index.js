@@ -43,13 +43,12 @@ class MenuGenerator extends React.Component {
 	};
 
 	render() {
-		const {label} = this.props
+		const {label, route} = this.props
 		const {menu} = this.state
 
 		if (!menu) {
 			return <div/>
 		}
-
 
 		return (
 			<List component="nav" subheader={<ListSubheader component="div" data-menu-label>{label}</ListSubheader>}>
@@ -69,10 +68,16 @@ class MenuGenerator extends React.Component {
 								<Collapse in={this.state.open} timeout="auto" unmountOnExit>
 									<List component="div" disablePadding>
 										{item.submenu.map((subitem, subindex) => {
-											let sublink = `${subitem.slug}/`
+											let params_ = {
+												lang: I18n.language
+											}
+											if(route == 'catalog') {
+											 	params_.folder = subitem.slug
+											}
+
 											return (
 												<div key={`subitem-${index}-${subindex}`}>
-													<Link route='catalog' params={{ lang: I18n.language, folder: subitem.slug }}><a>
+													<Link route={route} params={params_}><a>
 														<ListItem button dense>
 															<ListItemText primary={subitem.label}/>
 														</ListItem>
@@ -88,8 +93,15 @@ class MenuGenerator extends React.Component {
 						if (item.label == 'divider') {
 							return (<Divider key={index}/>)
 						} else {
+							let params_ = {
+								lang: I18n.language
+							}
+							if(route == 'catalog') {
+							 	params_.folder = item.link
+							}
+
 							return (
-								<Link route='catalog' params={{ lang: I18n.language, folder: item.link }}><a>
+								<Link route={route} params={params_}><a>
 									<ListItem button data-menulist-item>
 										{item.icon && <ListItemIcon>
 											<Icon>{item.icon}</Icon>
@@ -122,45 +134,48 @@ class MenuComponent extends React.Component {
 
 	state = {}
 
-	// componentDidMount() {
-	// 	console.log('//////')
-	// 	console.log(this.props.config)
-	// }
+	c(a) {
+		console.log('//////')
+		console.log(a)
+	}
 
 	render() {
 
-		const {user, config} = this.props
+		// const {user, config} = this.props
 
-		const menu_public = [
+		let menu_top = [
 			{
 				icon: 'home',
 				link: '/',
 				label: 'Home'
-			}, {
-				label: 'divider'
-			}, {
-				icon: 'folder',
-				link: '/p/posts/',
-				label: 'Categories',
-				// submenu: config.site_settings.catalog_menu,
-				submenu: [
-					{
-						label: 'Catalog 1',
-						slug: 'coool',
-						hint: 0
-					}, {
-						label: 'Page 2',
-						slug: false,
-						hint: 0
-					}, {
-						label: 'Page 3',
-						slug: false,
-						hint: 0
-					},
-				]
-			}, {
-				label: 'divider'
-			}, {
+			},
+		]
+
+		let menu_public = [
+			// {
+			// 	label: 'divider'
+			// }, {
+			// 	icon: 'folder',
+			// 	link: '/p/posts/',
+			// 	label: 'Categories',
+			// 	submenu: [
+			// 		// {
+			// 		// 	label: 'Catalog 1',
+			// 		// 	slug: 'coool',
+			// 		// 	hint: 0
+			// 		// }, {
+			// 		// 	label: 'Page 2',
+			// 		// 	slug: false,
+			// 		// 	hint: 0
+			// 		// }, {
+			// 		// 	label: 'Page 3',
+			// 		// 	slug: false,
+			// 		// 	hint: 0
+			// 		// },
+			// 	]
+			// }, {
+			// 	label: 'divider'
+			{
 				icon: 'stars',
 				link: '/p/account/orders/',
 				label: 'My orders'
@@ -177,13 +192,15 @@ class MenuComponent extends React.Component {
 			}
 		];
 
-		// return <div />
-
-		// if (config.site_settings.catalog_menu) {
 			return (
 				<div className={s.leftMenu}>
-					<MenuGenerator data={menu_public} label="Menu" {...this.props}/>
+
+					<MenuGenerator data={menu_top} route='index' label="Menu"/>
 					<Divider/>
+					{this.props.settings && <MenuGenerator data={this.props.settings.menu} route='catalog' label="Menu"/>}
+					<Divider/>
+					<MenuGenerator data={menu_public} route='index' label="Menu"/>
+
 				</div>
 			);
 		// }

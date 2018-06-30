@@ -30,7 +30,11 @@ i18nInstance
     backend: {
       loadPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.json'),
       addPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.missing.json')
-    }
+    },
+    detection: {
+      order: ['path']
+    },
+    // htmlTag: typeof window !== 'undefined' ? document.documentElement : false,
   }, () => {
     // loaded translations we can bootstrap our routes
     app.prepare()

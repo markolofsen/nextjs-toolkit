@@ -25,7 +25,6 @@ const _ = require('lodash');
 import s from './theme.scss'
 
 
-
 class MenuGenerator extends React.Component {
 
 	state = {
@@ -49,6 +48,7 @@ class MenuGenerator extends React.Component {
 			return <div/>
 		}
 
+
 		return (
 			<List component="nav" subheader={<ListSubheader component="div" data-menu-label>{label}</ListSubheader>}>
 
@@ -70,7 +70,7 @@ class MenuGenerator extends React.Component {
 											let sublink = `${subitem.slug}/`
 											return (
 												<div key={`subitem-${index}-${subindex}`}>
-													<Link href={sublink}>
+													<Link href={{ pathname: subitem.slug, query: {} }}>
 														<ListItem button dense>
 															<ListItemText primary={subitem.label}/>
 														</ListItem>
@@ -87,7 +87,7 @@ class MenuGenerator extends React.Component {
 							return (<Divider key={index}/>)
 						} else {
 							return (
-								<Link href={item.link} key={index}>
+								<Link href={{ pathname: item.link, query: {} }} key={index}>
 									<ListItem button data-menulist-item>
 										{item.icon && <ListItemIcon>
 											<Icon>{item.icon}</Icon>
@@ -144,7 +144,7 @@ class MenuComponent extends React.Component {
 				submenu: [
 					{
 						label: 'Catalog 1',
-						slug: '/catalog?lng=en',
+						slug: '/catalog',
 						hint: 0
 					}, {
 						label: 'Page 2',

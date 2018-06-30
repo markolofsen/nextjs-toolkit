@@ -28,6 +28,7 @@
     "jss": "^9.8.1",
     "mobx": "^4.2.1",
     "mobx-react": "^5.1.2",
+    "moment": "^2.22.2",
     "next": "^6.0.4-canary",
     "next-routes": "^1.4.2",
     "prop-types": "^15.6.2",

@@ -192,7 +192,7 @@ class Index extends React.Component {
 								<Icon>menu_icon</Icon>
 							</IconButton>
 							<Typography variant="title" color="inherit" noWrap className={classes.headerLogo}>
-								<Link href={`/`}>
+								<Link href={{ pathname: `/`, query: {} }}>
 									<span>
 										<span>{store.mainTitle}</span>
 										<sup>(1.1)</sup>

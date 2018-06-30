@@ -8,7 +8,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 
-import DatePicker from '../DatePicker'
+import DatePicker from '../DatePicker/'
 import ShowMore from '../../../components/ShowMore'
 import FormButton from '../../../components/BlockForm/FormButton'
 import FormSelect from '../../../components/BlockForm/FormSelect'

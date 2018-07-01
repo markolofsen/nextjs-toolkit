@@ -65,7 +65,9 @@ class Offer extends Component {
         _i18n={i18n}
         _title={data.title}
         _meta={[{ property: 'og:title', content: data.title }]} >
-        <Detail data={data} query={query} i18n={i18n}/>
+        <div>
+          <Detail data={data} query={query} i18n={i18n}/>
+        </div>
       </NavWrapper>
     )
 

@@ -15,7 +15,6 @@
     "@material-ui/icons": "^1.0.0-beta.43",
     "@zeit/next-css": "^0.2.0",
     "@zeit/next-sass": "^0.2.0",
-    "autoprefixer": "^8.6.4",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "express": "4.16.2",
@@ -48,12 +47,13 @@
     "screenfull": "^3.3.2"
   },
   "devDependencies": {
-    "autoprefixer": "7.1.5",
+    "autoprefixer": "^8.6.4",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "*",
     "babel-plugin-transform-replace-object-assign": "^1.0.0",
     "cross-env": "^5.1.4",
+    "merge-files-webpack-plugin": "^1.1.2",
     "node-sass": "^4.9.0",
     "postcss-loader": "^2.0.7",
     "raw-loader": "^0.5.1",

@@ -13,7 +13,7 @@ import Router from 'next/router'
 import NavWrapper from './NavWrapper/';
 import Helmet from 'react-helmet'
 
-
+import s from './theme.scss'
 //
 // Router.beforePopState(({ url, asPath, options }) => {
 //   // I only want to allow these two routes!
@@ -77,7 +77,7 @@ class Index extends React.Component {
         />
 
         <NavWrapper>
-          <div>
+          <div className={s.yo}>
             Welcome to Page2
             <br />
             <Link href={{ pathname: '/', query: { name: 'haha' } }}>

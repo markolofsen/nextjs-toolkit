@@ -16,7 +16,7 @@ export default class Footer extends Component {
 
 		return (
 			<div className={theme.wrapper}>
-				<div data-content-inner>
+				<div data-content>
 					<ul>
 						<li data-li="logotype">
 							<h3>

@@ -10,7 +10,7 @@ import { withI18next } from '../lib/withI18next'
 import axios from 'axios';
 // import Link, { prefetch } from '../components/link'
 // import {Link} from '../routes'
-import ItemView from './Catalog/ItemView/';
+// import ItemView from './Catalog/ItemView/';
 import TimeAgo from 'react-timeago';
 
 
@@ -87,7 +87,9 @@ class Article extends Component {
     const url = format({ pathname, query })
 
     // fetch data as usual
-    const reviews = await axios.get(`http://127.0.0.1:8000/api/catalog/tickets/reviews/${query.slug}/?page=${query.pagination}`).then(res => {
+    //
+    const pageNumber = typeof query.pagination !== 'undefined' ? query.pagination : 1;
+    const reviews = await axios.get(`http://127.0.0.1:8000/api/catalog/tickets/reviews/${query.slug}/?page=${pageNumber}`).then(res => {
       return res.data.results
     });
 

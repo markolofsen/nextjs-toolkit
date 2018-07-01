@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import 'react-dates/initialize';
 // import 'react-dates/lib/css/_datepicker.css';
-import datepickerCSS from '../../../node_modules/react-dates/lib/css/_datepicker.css';
-// import './theme.scss'
 
 import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';

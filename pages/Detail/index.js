@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import {withStyles} from '@material-ui/core/styles';
+// import {withStyles} from '@material-ui/core/styles';
 // import { withRouter } from 'react-router-dom'
 // import {Link} from 'react-router-dom';
 // import Link from '../../../components/Link';
@@ -32,6 +32,9 @@ import RatingBar from '../../components/RatingBar/';
 import Tickets from './Tickets/'
 
 import s from './theme.scss'
+
+
+
 
 
 
@@ -141,6 +144,9 @@ class ReviewsList extends Component {
 }
 
 
+const styles = theme => ({
+
+})
 
 @translate('cat')
 class PagePropertyDetail extends Component {
@@ -341,7 +347,7 @@ class PagePropertyDetail extends Component {
 
 				<div>{this.renderImagePanorama()}</div>
 
-				<div data-content-inner>
+				<div data-content>
 
 					<ul className={s.contentWrapper}>
 						<li data-li="left">
@@ -400,7 +406,8 @@ class PagePropertyDetail extends Component {
 }
 
 PagePropertyDetail.propTypes = {
-	// classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
+
 
 export default PagePropertyDetail;

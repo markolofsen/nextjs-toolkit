@@ -127,8 +127,8 @@ class ItemView extends Component {
 }
 
 ItemView.propTypes = {
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ItemView);
+export default ItemView;

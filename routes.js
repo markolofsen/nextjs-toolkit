@@ -7,8 +7,14 @@ const routes = module.exports = nextRoutes()
 //
 // routes.add('blog', '/blog/:slug')
 // routes.add('about', '/about-us/:foo(bar|baz)')
-routes.add('index', '/:lang')
+routes.add('index', '/:lang', 'catalog')
+
 routes.add('offer', '/:lang/offer/:slug')
+
+
+routes.add('offer_reviews', '/:lang/offer/:slug/reviews/:pagination')
 routes.add('offer_reviews_all', '/:lang/offer/:slug/reviews', 'offer_reviews')
-routes.add('offer_reviews', '/:lang/offer/:slug/reviews/:pagination', 'offer_reviews')
-routes.add('catalog', '/:lang/catalog/:folder')
+
+
+routes.add('catalog', '/:lang/catalog/:folder', 'catalog')
+routes.add('catalog_page', '/:lang/catalog/:folder/:pagination', 'catalog')

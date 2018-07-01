@@ -6,6 +6,7 @@ import getPageContext from '../utils/getPageContext';
 import Helmet from 'react-helmet'
 
 
+
 import { GA_TRACKING_ID } from '../lib/gtag'
 
 // import stylesheet from '../style/index.scss';
@@ -69,6 +70,9 @@ class MyDocument extends Document {
 
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
           <link rel="stylesheet" href="/_next/static/style.css" />
+          <link rel='stylesheet' type='text/css' href='/static/nprogress.css' />
+          <link rel='stylesheet' type='text/css' href='/static/react-dates.css' />
+
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 

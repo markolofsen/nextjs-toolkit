@@ -28,8 +28,24 @@ import Footer from './Footer/';
 
 import s from './index.scss'
 
-// const i18next = require('i18next')
 import { I18n } from '../../i18n'
+
+
+/*
+ * PRELOADER
+ */
+import NProgress from 'nprogress'
+import Router from 'next/router'
+Router.onRouteChangeStart = (url) => {
+  console.log(`Loading: ${url}`)
+  NProgress.start()
+}
+Router.onRouteChangeComplete = () => NProgress.done()
+Router.onRouteChangeError = () => NProgress.done()
+
+
+
+
 
 const drawerWidth = 240;
 

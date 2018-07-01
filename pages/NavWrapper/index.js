@@ -163,13 +163,14 @@ class Index extends React.Component {
 		// 	// resources: require(`json!./${language}.json`)
 		});
 
-		// this.props.actions.changeLanguage(i18next);
-		// window.localStorage.i18nextLng = language
-		L.Router.pushRoute('catalog', { lang: language, folder: 'any' })
-		console.log('--------')
+		// console.log('--------')
 		// console.log(I18n.language)
 		// console.log(L)
-		// console.log(Link)
+		let saveParams = L.Router.router.query
+				saveParams.lang = language
+		let saveRoute = L.Router.router.route.split('/')[1]
+
+		L.Router.pushRoute(saveRoute, saveParams)
 		this.handleClose()
 
 	}
@@ -220,7 +221,6 @@ class Index extends React.Component {
 							<Typography variant="title" color="inherit" noWrap className={classes.headerLogo}>
 								<Link route='index' params={{ lang: 'ru' }}>
 									<a>
-										({typeof window !== 'undefined' ? window.localStorage.i18nextLng : '?'})
 										<span>{store.settings.sitename}</span>
 										<sup>(1.1)</sup>
 									</a>
@@ -234,7 +234,7 @@ class Index extends React.Component {
 			          onClick={this.handleClick}
 								color="inherit" >
 								<Icon style={{marginRight: 5}}>language</Icon>
-			          {I18n.language}
+								{I18n ? I18n.language : 'en'}
 			        </Button>
 			        <Menu
 			          id="language-menu"

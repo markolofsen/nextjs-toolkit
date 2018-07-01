@@ -8,7 +8,7 @@ import Helmet from 'react-helmet'
 
 import { GA_TRACKING_ID } from '../lib/gtag'
 
-import stylesheet from '../style/index.scss';
+// import stylesheet from '../style/index.scss';
 
 
 class MyDocument extends Document {

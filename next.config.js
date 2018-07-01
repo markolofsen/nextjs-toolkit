@@ -2,8 +2,10 @@ const path = require('path')
 const webpack = require('webpack')
 const withCSS = require('@zeit/next-css')
 
+
 const withSass = require('@zeit/next-sass')
 const autoprefixer = require('autoprefixer');
+
 
 module.exports = withSass(withCSS({
   plugins: [
@@ -20,8 +22,10 @@ module.exports = withSass(withCSS({
     localIdentName: "[local]___[hash:base64:5]",
   },
 
-  webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
+  webpack: (config, options) => {
     // config.module.rules.push({ test: /\.scss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] });
+    const { buildId, dev, isServer, defaultLoaders } = options;
+
 
     //MyHack: only save node_modules files in static/commons/main-[chunkhash].js
     if (!isServer && !dev) {
@@ -46,5 +50,5 @@ module.exports = withSass(withCSS({
       }
     }
     return config
-  },
-}));
+  }
+}))

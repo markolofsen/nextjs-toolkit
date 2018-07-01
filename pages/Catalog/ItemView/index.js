@@ -22,7 +22,7 @@ import NumberFormat from 'react-number-format';
 import {isBrowser, isMobile} from 'react-device-detect';
 
 import s from './theme.scss'
-import './theme.scss'
+// import './theme.scss'
 
 const styles = {
 
@@ -43,7 +43,7 @@ class ItemView extends Component {
     }
 
     render() {
-        const {t, classes, data, discountCode} = this.props
+        const {t, data, discountCode} = this.props
         const {countdown} = this.state
 
         // let routing_url = `/offer/${data.slug}`

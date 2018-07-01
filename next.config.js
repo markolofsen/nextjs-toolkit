@@ -1,42 +1,48 @@
-const resolve = require('resolve')
-const withCSS = require('@zeit/next-css')
+const path = require('path')
+const webpack = require('webpack')
 const withSass = require('@zeit/next-sass')
+const withCss = require('@zeit/next-css')
+const autoprefixer = require('autoprefixer');
 
-module.exports = withCSS(withSass({
-  cssModules: true,
-
-  webpack (config, options) {
-    const { dir, isServer } = options
-
-    config.externals = []
-
-    if (isServer) {
-      config.externals.push((context, request, callback) => {
-        resolve(request, { basedir: dir, preserveSymlinks: true }, (err, res) => {
-          if (err) {
-            return callback()
-          }
-
-          // Next.js by default adds every module from node_modules to
-          // externals on the server build. This brings some undesirable
-          // behaviors because we can't use modules that require CSS files like
-          // `former-kit-skin-pagarme`.
-          //
-          // The lines below blacklist webpack itself (that cannot be put on
-          // externals) and `former-kit-skin-pagarme`.
-          if (
-            res.match(/node_modules[/\\].*\.js/)
-            && !res.match(/node_modules[/\\]webpack/)
-            && !res.match(/node_modules[/\\]former-kit-skin-pagarme/)
-          ) {
-            return callback(null, `commonjs ${request}`)
-          }
-
-          callback()
-        })
-      })
+module.exports = withCss(withSass({
+  plugins: [
+    {
+      autoprefixer: {},
+    },
+    {
+      'postcss-css-variables': {},
     }
+  ],
+  cssModules: true,
+  cssLoaderOptions: {
+    importLoaders: 1,
+    localIdentName: "[local]___[hash:base64:5]",
+  },
 
+  webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
+
+    //MyHack: only save node_modules files in static/commons/main-[chunkhash].js
+    if (!isServer && !dev) {
+      for (plugin of config.plugins) {
+        if (plugin['constructor']['name'] === 'CommonsChunkPlugin'
+          && plugin.filenameTemplate == "static/commons/main-[chunkhash].js") {
+          plugin.minChunks = function (module, count) {
+            var needChunk = (
+              module.resource &&
+              // /\.js$/.test(module.resource) &&
+              module.resource.indexOf(
+                path.join(__dirname, './node_modules')
+              ) === 0
+            )
+            if (needChunk) {
+              // console.log("needChunk = ", module.resource)
+            }
+            return needChunk
+          }
+          break;
+        }
+      }
+    }
     return config
   },
-}))
+}));

@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
   },
+
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -28,7 +29,7 @@
     "mobx": "^4.2.1",
     "mobx-react": "^5.1.2",
     "moment": "^2.22.2",
-    "next": "^6.0.4-canary",
+    "next": "^6.1.1",
     "next-routes": "^1.4.2",
     "prop-types": "^15.6.2",
     "prop-types-exact": "^1.1.1",
@@ -44,20 +45,15 @@
     "react-number-format": "^3.4.2",
     "react-player": "^1.6.4",
     "react-timeago": "^4.1.9",
-    "screenfull": "^3.3.2"
+    "screenfull": "^3.3.2",
+    "autoprefixer": "^8.6.4"
   },
   "devDependencies": {
-    "autoprefixer": "^8.6.4",
-    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-module-resolver": "*",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "*",
-    "babel-plugin-transform-replace-object-assign": "^1.0.0",
     "cross-env": "^5.1.4",
-    "merge-files-webpack-plugin": "^1.1.2",
     "node-sass": "^4.9.0",
-    "postcss-loader": "^2.0.7",
-    "raw-loader": "^0.5.1",
-    "sass-loader": "^6.0.6",
     "styled-jsx": "^2.2.1",
     "styled-jsx-css-loader": "^0.3.0",
     "styled-jsx-plugin-sass": "^0.2.2"

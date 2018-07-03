@@ -1,13 +1,14 @@
 import React from 'react';
 // import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
 import withRoot from '../../../utils/withRoot';
 import {connect} from 'react-redux';
 // import Link from '../../Link';
 // import Link, {prefetch} from '../../../components/link'
 import {Link} from '../../../routes'
-import { I18n } from '../../../i18n'
+// import { I18n } from '../../../i18n'
+import { observer } from 'mobx-react'
+import store from '../../../data/store'
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -22,11 +23,17 @@ import Icon from '@material-ui/core/Icon';
 
 import Preloader from '../../../components/Preloader';
 
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
+
 const _ = require('lodash');
 
-import s from './theme.scss'
+// import s from './theme.scss'
 
 
+
+@observer
+@withStyles(styles)
 class MenuGenerator extends React.Component {
 
 	state = {
@@ -69,14 +76,14 @@ class MenuGenerator extends React.Component {
 									<List component="div" disablePadding>
 										{item.submenu.map((subitem, subindex) => {
 											let params_ = {
-												lang: I18n.language
+												lang: store.language
 											}
 											if(route == 'catalog') {
 											 	params_.folder = subitem.slug
 											}
 
 											return (
-												<div key={`subitem-${index}-${subindex}`}>
+												<div key={`subindex-${index}-${subindex}`}>
 													<Link route={route} params={params_}><a>
 														<ListItem button dense>
 															<ListItemText primary={subitem.label}/>
@@ -94,21 +101,23 @@ class MenuGenerator extends React.Component {
 							return (<Divider key={index}/>)
 						} else {
 							let params_ = {
-								lang: I18n.language
+								lang: store.language
 							}
 							if(route == 'catalog') {
 							 	params_.folder = item.link
 							}
 
 							return (
-								<Link route={route} params={params_}><a>
-									<ListItem button data-menulist-item>
-										{item.icon && <ListItemIcon>
-											<Icon>{item.icon}</Icon>
-										</ListItemIcon>}
-										<ListItemText primary={item.label}/>
-									</ListItem>
-								</a></Link>
+								<div key={index}>
+									<Link route={route} params={params_}><a>
+										<ListItem button data-menulist-item>
+											{item.icon && <ListItemIcon>
+												<Icon>{item.icon}</Icon>
+											</ListItemIcon>}
+											<ListItemText primary={item.label}/>
+										</ListItem>
+									</a></Link>
+								</div>
 							)
 						}
 					}
@@ -119,29 +128,19 @@ class MenuGenerator extends React.Component {
 	}
 }
 
-const styles = theme => ({
-	root: {
-		width: '100%',
-		maxWidth: 360,
-		background: theme.palette.background.paper,
-	},
-	nested: {
-		paddingLeft: theme.spacing.unit * 4
-	}
-});
 
+
+
+@observer
+@withStyles(styles)
 class MenuComponent extends React.Component {
 
 	state = {}
 
-	c(a) {
-		console.log('//////')
-		console.log(a)
-	}
 
 	render() {
 
-		// const {user, config} = this.props
+		const {classes} = this.props
 
 		let menu_top = [
 			{
@@ -193,13 +192,13 @@ class MenuComponent extends React.Component {
 		];
 
 			return (
-				<div className={s.leftMenu}>
+				<div className={classes.leftMenu}>
 
-					<MenuGenerator data={menu_top} route='index' label="Menu"/>
+					<MenuGenerator data={menu_top} route='index' label="Menu" />
 					<Divider/>
-					{this.props.settings && <MenuGenerator data={this.props.settings.menu} route='catalog' label="Menu"/>}
+					{store.settings && <MenuGenerator data={store.settings.menu} route='catalog' label="Menu" />}
 					<Divider/>
-					<MenuGenerator data={menu_public} route='index' label="Menu"/>
+					<MenuGenerator data={menu_public} route='index' label="Menu" />
 
 				</div>
 			);
@@ -213,12 +212,5 @@ MenuComponent.propTypes = {
 	// classes: PropTypes.object.isRequired
 };
 
-// export default withStyles(styles)(MenuComponent);
 
-// export default connect((mapStateToProps) => (mapStateToProps), dispatch => ({
-// 	onToggleLeftMenu: (payload) => {
-// 		dispatch({type: 'LEFT_MENU_TOGGLE', payload})
-// 	}
-// }))(withStyles(s)(MenuComponent));
-
-export default withStyles(styles)(MenuComponent);
+export default MenuComponent;

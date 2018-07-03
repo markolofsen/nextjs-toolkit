@@ -1,61 +1,29 @@
 import React, {Component} from 'react'
 
-import axios from 'axios';
-import { format } from 'url'
-
+// import axios from 'axios';
+// import { format } from 'url'
+import {get} from '../data/config';
 
 import { withI18next } from '../lib/withI18next'
 import withRoot from '../utils/withRoot';
 import Detail from './Detail/';
 import NavWrapper from './NavWrapper/';
 
-const posts = [
-  { slug: 'hello-world', title: 'Hello world)' },
-  { slug: 'another-blog-post', title: 'Another blog post' }
-]
-
 
 @withI18next(['home', 'common'])
 class Offer extends Component {
+
   static async getInitialProps ({ req, query, pathname, isVirtualCall }) {
-    // const post = posts.find(post => post.slug === query.slug)
-    //
-    // if (!post && res) {
-    //   res.statusCode = 404
-    // }
-    //
-    const url = format({ pathname, query })
+    // const url = format({ pathname, query })
 
-    // if we're not running server side
-    // get the props from sessionStorage using the pathname + query as key
-    // if we got something return it as an object
-    if (!req) {
-      const props = window.sessionStorage.getItem(url)
-      if (props) {
-        return JSON.parse(props)
-      }
-    }
-
-    const data = await axios.get(`http://127.0.0.1:8000/api/catalog/tickets/detail/${query.slug}/0/`).then(res => {
-      return res.data.results
-    })
-    // let offer = query.slug
-    const props = { data, query }
-    // console.log(query.slug)
-    // if the method is being called by our Link component
-    // save props on sessionStorage using the full url (pathname + query)
-    // as key and the serialized props as value
-    if (isVirtualCall) {
-      window.sessionStorage.setItem(url, JSON.stringify(props))
-    }
-
+    // fetch data as usual
+    const data = await get(`/api/catalog/tickets/detail/${query.slug}/0/?lang=${query.lang}`).then(res => res.results)
+    const props = { data: data, query }
     return props
   }
 
   render () {
     const { i18n, data, query } = this.props
-
-    console.log(data)
 
     if (!data) return <h1>Post not found</h1>
 

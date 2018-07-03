@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+// import {withStyles} from '@material-ui/core/styles';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -215,4 +215,4 @@ Tickets.propTypes = {
 	offerId: PropTypes.number.isRequired
 };
 
-export default withStyles(s)(Tickets);
+export default Tickets;

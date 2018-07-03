@@ -1,6 +1,7 @@
 import { action, observable } from 'mobx'
-import axios from 'axios';
-
+// import axios from 'axios';
+import { I18n } from '../i18n'
+import {get} from './config';
 
 class Store {
   @observable isServer = false
@@ -21,10 +22,11 @@ class Store {
 
   @observable leftMenu = true
   @observable settings = false
+  @observable language = typeof navigator !== 'undefined' ? navigator.language || navigator.userLanguage : 'en'
 
   // fetch data
   @action async loadSettings() {
-    this.settings = await axios.get(`http://127.0.0.1:8000/api/system/settings/`).then(res => res.data.results)
+    this.settings = await get(`/api/system/settings/`).then(res => res.results)
   }
 
   constructor() {
@@ -91,6 +93,9 @@ class Store {
 
   @action leftMenuToggle = () => {
     this.leftMenu = !this.leftMenu
+  }
+  @action languageUpdate = () => {
+    this.language = I18n.language
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+// import {withStyles} from '@material-ui/core/styles';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -13,14 +13,14 @@ const _ = require('lodash');
 import s from './theme.scss'
 
 
-const styles = theme => ({
-	paper: {
-		height: 'auto',
-	  maxHeight: 'auto',
-	  overflow: 'auto',
-	  width: 305
-	},
-})
+// const styles = theme => ({
+// 	paper: {
+// 		height: 'auto',
+// 	  maxHeight: 'auto',
+// 	  overflow: 'auto',
+// 	  width: 305
+// 	},
+// })
 
 class SimplePopover extends React.Component {
 	state = {
@@ -199,7 +199,7 @@ class SimplePopover extends React.Component {
 					vertical: 'top',
 					horizontal: 'left'
 				}} classes={{
-					paper: classes.paper
+					paper: s.paper
 				}}>
 					<Typography className={s.typography}>
 						Manage your booking
@@ -217,4 +217,4 @@ SimplePopover.propTypes = {
 	addon: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(SimplePopover);
+export default SimplePopover;

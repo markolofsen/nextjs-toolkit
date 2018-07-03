@@ -22,6 +22,7 @@ import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import store from '../../data/store'
 import Helmet from 'react-helmet'
+import {isBrowser, isMobile} from 'react-device-detect';
 
 import LeftMenu from './LeftMenu/';
 import Footer from './Footer/';
@@ -171,42 +172,37 @@ class Index extends React.Component {
 
   handleDrawerOpen() {
     store.leftMenuToggle()
+    window.scrollTo(0, 0)
   }
 
 	setLanguage(language) {
 		I18n.init({
 			lng: language,
-		// 	// resources: require(`json!./${language}.json`)
 		});
 
-		// console.log('--------')
-		// console.log(I18n.language)
-		// console.log(L)
+		let saveRoute = L.Router.router.route.split('/')[1]
+
 		let saveParams = L.Router.router.query
 				saveParams.lang = language
-		let saveRoute = L.Router.router.route.split('/')[1]
+
+    // Hack for index/catalog
+    if(saveRoute == 'catalog' && typeof saveParams.folder === 'undefined') {
+      saveRoute = 'index'
+    }
 
 		L.Router.pushRoute(saveRoute, saveParams)
 		this.handleClose()
 
 	}
 	componentWillMount() {
-	  // this.setLanguage('en');
-		// // console.log('——————')
-		// // console.log(store)
-		// console.log('——————')
-		// console.log('——————')
-		// console.log(window.location)
+    if(isMobile) {
+      store.leftMenu = false;
+    }
 	}
 
-	// componentDidMount() {
-	// 	console.log('——————')
-	// 	console.log(L.lang)
-	// }
-	// c() {
-	// 	console.log('--------')
-	// 	store.loadSettings()
-	// }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    store.languageUpdate()
+  }
 
 
 	handleClick = event => {
@@ -224,7 +220,7 @@ class Index extends React.Component {
 		return (
 			<div className={classes.root}>
 				<Helmet
-					htmlAttributes={{lang: _i18n ? _i18n.languages[0] : 'en'}}
+					htmlAttributes={{lang: store.language}}
           title={`${_title} | ${store.settings.slogan}`}
           meta={_meta}
         />
@@ -235,7 +231,7 @@ class Index extends React.Component {
 								<Icon>menu_icon</Icon>
 							</IconButton>
 							<Typography variant="title" color="inherit" noWrap className={classes.headerLogo}>
-								<Link route='index' params={{ lang: 'ru' }}>
+								<Link route='index' params={{ lang: store.language }}>
 									<a>
 										<span>{store.settings.sitename}</span>
 										<sup>(1.1)</sup>
@@ -250,15 +246,18 @@ class Index extends React.Component {
 			          onClick={this.handleClick}
 								color="inherit" >
 								<Icon style={{marginRight: 5}}>language</Icon>
-								{I18n ? I18n.language : 'en'}
+								{store.language}
 			        </Button>
 			        <Menu
-			          id="language-menu"
-			          anchorEl={anchorEl}
-			          open={Boolean(anchorEl)}
-			          onClose={this.handleClose}>
-			          <MenuItem onClick={() => this.setLanguage('en')}>English</MenuItem>
-							<MenuItem onClick={() => this.setLanguage('ru')}>Russian</MenuItem>
+                id="language-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={this.handleClose}>
+                  <MenuItem onClick={() => this.setLanguage('en')}>English</MenuItem>
+                  <MenuItem onClick={() => this.setLanguage('es')}>Spanish</MenuItem>
+                  <MenuItem onClick={() => this.setLanguage('ru')}>Russian</MenuItem>
+                  <MenuItem onClick={() => this.setLanguage('de')}>German</MenuItem>
+                  <MenuItem onClick={() => this.setLanguage('fr')}>French</MenuItem>
 			        </Menu>
 
 						</div>
@@ -279,7 +278,7 @@ class Index extends React.Component {
 						<Divider/>
 					</div>}
 
-					<LeftMenu {...store} />
+					<LeftMenu />
 
 				</Drawer>
 				<main className={classes.content}>

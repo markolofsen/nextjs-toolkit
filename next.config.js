@@ -1,10 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
 const withSass = require('@zeit/next-sass')
-const withCss = require('@zeit/next-css')
 const autoprefixer = require('autoprefixer');
 
-module.exports = withCss(withSass({
+module.exports = withSass({
   plugins: [
     {
       autoprefixer: {},
@@ -45,4 +44,4 @@ module.exports = withCss(withSass({
     }
     return config
   },
-}));
+});

@@ -12,14 +12,14 @@
   left: 0;
   width: 100%;
 
-  height: 4px;
-  top: 60px;
+  height: 2px;
+  top: 62px;
 
 }
 @media screen and (max-width: 600px) {
   #nprogress .bar {
-    height: 3px;
-    top: 53px;
+    height: 2px;
+    top: 54px;
   }
 }
 /* Fancy blur effect */

@@ -16,5 +16,6 @@ routes.add('offer_reviews', '/:lang/offer/:slug/reviews/:pagination')
 routes.add('offer_reviews_all', '/:lang/offer/:slug/reviews', 'offer_reviews')
 
 
+routes.add('catalog_all', '/:lang/catalog', 'catalog')
 routes.add('catalog', '/:lang/catalog/:folder', 'catalog')
 routes.add('catalog_page', '/:lang/catalog/:folder/:pagination', 'catalog')

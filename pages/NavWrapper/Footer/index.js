@@ -3,7 +3,11 @@ import React, {Component} from 'react';
 // import {Link} from 'react-router-dom';
 // import Typography from '@material-ui/core/Typography';
 // import {confSite} from '../../../config/init.js'
-import Link from 'next/link'
+// import Link from 'next/link'
+import {Link} from '../../../routes'
+import { I18n } from '../../../i18n'
+import { translate } from 'react-i18next'
+
 
 import theme from './theme.scss'
 
@@ -27,19 +31,34 @@ export default class Footer extends Component {
 						<li data-li="menu">
 							<ul>
 								<li>
-									<Link href={`/p/free/`}>First order for free!</Link>
+									<Link route='catalog_all' params={{ lang: store.language }}><a>
+										Home
+									</a></Link>
 								</li>
 							</ul>
 							<ul>
 								<li>
-									<Link href={`/p/news/`}>News</Link>
+									<Link href={`/p/news/`}><a>
+										News
+									</a></Link>
 								</li>
 								<li>
-									<Link href={`/p/support/`}>Support</Link>
+									<Link href={`/p/support/`}><a>
+										Support
+									</a></Link>
 								</li>
 							</ul>
 							<ul>
-								<li>...</li>
+								<li>
+									<Link href={`/en`}><a>
+										English
+									</a></Link>
+								</li>
+								<li>
+									<Link href={`/ru`}><a>
+										Russian
+									</a></Link>
+								</li>
 							</ul>
 							<div>
 								<div data-el="gototop" onClick={() => window.scrollTo(0, 0)}>

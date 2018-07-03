@@ -10,6 +10,7 @@ const routes = require('./routes')
 const handler = routes.getRequestHandler(app)
 
 const i18nextMiddleware = require('i18next-express-middleware')
+
 const Backend = require('i18next-node-fs-backend')
 const { i18nInstance } = require('./i18n')
 
@@ -20,19 +21,22 @@ const { i18nInstance } = require('./i18n')
 // const lang = express().get('*', (req, res) => { return res })
 // console.log(lang.mountpath.split('/'))
 
+
+const acceptedLangs = ['en','es','ru','fr','de'];
+
 i18nInstance
   .use(Backend)
   .use(i18nextMiddleware.LanguageDetector)
   .init({
     fallbackLng: 'en',
-    preload: ['en', 'de', 'ru'], // preload all langages
+    preload: acceptedLangs, // preload all langages
     ns: ['common', 'home', 'page2', 'cat'], // need to preload all the namespaces
     backend: {
       loadPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.json'),
       addPath: path.join(__dirname, '/locales/{{lng}}/{{ns}}.missing.json')
     },
     detection: {
-      order: ['path']
+      order: ['htmlTag','path']
     },
     // htmlTag: typeof window !== 'undefined' ? document.documentElement : false,
   }, () => {
@@ -53,6 +57,17 @@ i18nInstance
 
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18nInstance))
+
+
+        // LANGUAGE REDIRECT FROM ROOT PAGE
+        server.get('/', (req, res) => {
+          const browserLang = req.headers["accept-language"].split(',')[0];
+          if(acceptedLangs.indexOf(browserLang)) {
+            res.redirect(`/${browserLang}`);
+          } else {
+            res.redirect(`/en`);
+          }
+        })
 
         server.use(handler)
 

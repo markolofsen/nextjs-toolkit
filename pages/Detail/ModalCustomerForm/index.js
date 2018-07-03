@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import { withStyles } from '@material-ui/core/styles';
+// import { withStyles } from '@material-ui/core/styles';
 // import { withRouter } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -18,7 +18,6 @@ import FormButton from '../../../components/BlockForm/FormButton'
 // import {apiCatalogTicketsBooking, cookie} from '../../../../../utils/functions'
 
 import s from './theme.scss'
-
 
 
 class Block extends Component {
@@ -186,26 +185,28 @@ class Block extends Component {
     }
 
 	render() {
-        const {open, form_complete} = this.state
+    const {open, form_complete} = this.state
 
-        return (
-          <div>
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
-              maxWidth="xs"
-            >
-              <DialogTitle id="form-dialog-title">Confirmation</DialogTitle>
-              <DialogContent>
+    return <div />
 
-                  {form_complete ? this.renderFormComplete() : this.renderForm()}
-
-              </DialogContent>
-            </Dialog>
-          </div>
-        );
-    }
+    // return (
+    //   <div>
+    //     <Dialog
+    //       open={this.state.open}
+    //       onClose={this.handleClose}
+    //       aria-labelledby="form-dialog-title"
+    //       maxWidth="xs"
+    //     >
+    //       <DialogTitle id="form-dialog-title">Confirmation</DialogTitle>
+    //       <DialogContent>
+    //
+    //           {form_complete ? this.renderFormComplete() : this.renderForm()}
+    //
+    //       </DialogContent>
+    //     </Dialog>
+    //   </div>
+    // );
+  }
 
 }
 
@@ -215,4 +216,4 @@ Block.propTypes = {
   // classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(s)(Block);
+export default Block;

@@ -13,6 +13,8 @@ import {isBrowser, isMobile} from 'react-device-detect';
 import { translate } from 'react-i18next'
 import {Link} from '../../routes'
 // import { I18n } from '../../i18n'
+import { observer } from 'mobx-react'
+import store from '../../data/store'
 
 import Preloader from '../../components/Preloader/'
 import ShowMore from '../../components/ShowMore/'
@@ -31,7 +33,10 @@ import RatingBar from '../../components/RatingBar/';
 // import ProfileBlock from '../../Profile/ProfileBlock'
 import Tickets from './Tickets/'
 
-import s from './theme.scss'
+// import s from './theme.scss'
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
+
 
 
 
@@ -39,6 +44,7 @@ import s from './theme.scss'
 
 
 @translate('cat')
+@withStyles(styles)
 class ReviewsList extends Component {
 
 	constructor(props) {
@@ -83,7 +89,7 @@ class ReviewsList extends Component {
 
 	render() {
 
-		const {data, query, t, i18n} = this.props
+		const {data, query, t, i18n, classes} = this.props
 
 		if (!data.rating) {
 			return <div/>
@@ -91,19 +97,19 @@ class ReviewsList extends Component {
 
 
 		return (
-			<div className={s.reviewsWrapper}>
+			<div className={classes.reviewsWrapper}>
 
-				<Link route='offer_reviews_all' params={{ lang: i18n ? i18n.language : 'en', slug: query.slug }}><a data-link>
-					{t('All reviews')}
-				</a></Link>
+				<Link route='offer_reviews_all' params={{ lang: this.props.language, slug: query.slug }}>
+					<a data-link>{t('All reviews')}</a>
+				</Link>
 
-				<ul className={s.reviewsTop}>
+				<ul className={classes.reviewsTop}>
 					<li><RatingBar rating={data.rating} size="lg"/></li>
 					<li>{data.counter}
 						reviews</li>
 				</ul>
 
-				<div className={s.reviewsList} ref={(el) => {
+				<div className={classes.reviewsList} ref={(el) => {
 					this.reviewsContainer = el;
 				}} onMouseEnter={this.stopScroll}>
 					{data.data.map((item, index) => {
@@ -144,11 +150,10 @@ class ReviewsList extends Component {
 }
 
 
-const styles = theme => ({
-
-})
 
 @translate('cat')
+@observer
+@withStyles(styles)
 class PagePropertyDetail extends Component {
 
 	state = {
@@ -269,13 +274,13 @@ class PagePropertyDetail extends Component {
 	}
 
 	renderDetails() {
-    const {data} = this.props
+    const {data, classes} = this.props
 
 		if (!data.description) {
 			return <div/>
 		}
 		return (
-			<div className={s.offerDescription}>
+			<div className={classes.offerDescription}>
 				<ShowMore text={data.description} height={150}/>
 			</div>
 		)
@@ -294,7 +299,7 @@ class PagePropertyDetail extends Component {
 
 	renderImagePanorama() {
 		const {allow_video} = this.state
-    const {t, data} = this.props
+    const {t, data, classes} = this.props
 
 		let images = []
 		if (data.images) {
@@ -310,24 +315,24 @@ class PagePropertyDetail extends Component {
 		return (
 			<div>
 				{allow_video
-					? <Player className={s.videoPanorama} autoPlay={allow_video} url={data.video}/>
+					? <Player className={classes.videoPanorama} autoPlay={allow_video} url={data.video}/>
 					: <div style={{
 						backgroundImage: `url(${data.image_panorama})`
-					}} className={s.imagePanorama} onClick={this.openGallery}/>}
+					}} className={classes.imagePanorama} onClick={this.openGallery}/>}
 
 				{images && <GalleryModal images={images} onRef={ref => (this.refGalleryModal = ref)}/>}
 
-				<div className={allow_video
-					? s.galleryButtonsVideo
-					: s.galleryButtons}>
-					<Button variant="contained" onClick={this.openGallery}>
-						<Icon>photo_camera</Icon>
-						{t('Show photos')}
-					</Button>
-					{data.video && <Button variant="contained" onClick={(event) => this.playVideo(event)}>
-						<Icon>play_arrow</Icon>
-						{t('Play video')}
-					</Button>}
+				<div className={classes.galleryButtons}>
+					<div data-gallery-buttons={allow_video}>
+						<Button variant="contained" onClick={this.openGallery}>
+							<Icon>photo_camera</Icon>
+							{t('Show photos')}
+						</Button>
+						{data.video && <Button variant="contained" onClick={(event) => this.playVideo(event)}>
+							<Icon>play_arrow</Icon>
+							{t('Play video')}
+						</Button>}
+					</div>
 				</div>
 
 			</div>
@@ -335,7 +340,7 @@ class PagePropertyDetail extends Component {
 	}
 
 	render() {
-		const {data, reviews, query, i18n} = this.props
+		const {data, reviews, query, i18n, classes} = this.props
 		const {render} = this.state
 
 		// if (!data) {
@@ -343,16 +348,16 @@ class PagePropertyDetail extends Component {
 		// }
 
 		return (
-			<div className={s.offerWrapper}>
+			<div className={classes.offerWrapper}>
 
 				<div>{this.renderImagePanorama()}</div>
 
 				<div data-content>
 
-					<ul className={s.contentWrapper}>
+					<ul className={classes.contentWrapper}>
 						<li data-li="left">
 
-							<ul className={s.contentHeader}>
+							<ul className={classes.contentHeader}>
 								<li>
 									{data.categories.map((category, c) => {
 										return (
@@ -383,12 +388,12 @@ class PagePropertyDetail extends Component {
 
 						</li>
 						<li data-li="right">
-							<ReviewsList data={data.reviews} query={query} i18n={i18n}/>
+							<ReviewsList data={data.reviews} query={query} i18n={i18n} language={store.language}/>
 						</li>
 					</ul>
 
 					{!render &&
-					<ul className={s.gallerySSR}>
+					<ul className={classes.gallerySSR}>
 						{data.images.map((image, index) => {
 							return (
 								<li key={index}>
@@ -406,7 +411,7 @@ class PagePropertyDetail extends Component {
 }
 
 PagePropertyDetail.propTypes = {
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
 };
 
 

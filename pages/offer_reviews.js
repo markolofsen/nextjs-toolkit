@@ -3,11 +3,13 @@ import fetch from 'isomorphic-unfetch'
 import { format } from 'url'
 
 import withRoot from '../utils/withRoot';
+import {get} from '../data/config';
+
 import NavWrapper from './NavWrapper/';
 // import Helmet from 'react-helmet'
 
 import { withI18next } from '../lib/withI18next'
-import axios from 'axios';
+// import axios from 'axios';
 // import Link, { prefetch } from '../components/link'
 // import {Link} from '../routes'
 // import ItemView from './Catalog/ItemView/';
@@ -89,14 +91,9 @@ class Article extends Component {
     // fetch data as usual
     //
     const pageNumber = typeof query.pagination !== 'undefined' ? query.pagination : 1;
-    const reviews = await axios.get(`http://127.0.0.1:8000/api/catalog/tickets/reviews/${query.slug}/?page=${pageNumber}`).then(res => {
-      return res.data.results
-    });
+    const data = await get(`/api/catalog/tickets/reviews/${query.slug}/?page=${pageNumber}`).then(res => res.results)
 
-
-    const props = { reviews }
-
-
+    const props = { data }
     return props
   }
 
@@ -108,7 +105,7 @@ class Article extends Component {
 
 
   render () {
-    const { i18n, t, reviews } = this.props
+    const { i18n, t, data } = this.props
 
     return (
       <div>
@@ -118,7 +115,7 @@ class Article extends Component {
           _meta={[{ property: 'og:title', content: 'Reviews' }]} >
           <div data-content>
             {t('Reviews')}
-            {reviews.map((item, index) => (
+            {data.map((item, index) => (
               <ReviewsCard key={index} data={item} />
             ))}
           </div>

@@ -10,18 +10,11 @@ import Icon from '@material-ui/core/Icon';
 import NumberFormat from 'react-number-format';
 const _ = require('lodash');
 
-import s from './theme.scss'
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
 
 
-// const styles = theme => ({
-// 	paper: {
-// 		height: 'auto',
-// 	  maxHeight: 'auto',
-// 	  overflow: 'auto',
-// 	  width: 305
-// 	},
-// })
-
+@withStyles(styles)
 class SimplePopover extends React.Component {
 	state = {
 		anchorEl: null
@@ -111,13 +104,13 @@ class SimplePopover extends React.Component {
 
 	renderPopoverContent() {
 
-		const {data} = this.props
+		const {data, classes} = this.props
 
 		// console.log(data)
 
 		return (
 			<div>
-				<div className={s.popover}>
+				<div className={classes.popover}>
 
 					{data.map((item, index) => {
 						return (
@@ -140,7 +133,7 @@ class SimplePopover extends React.Component {
 												? item.price
 												: 0} displayType={'text'} decimalScale={0} thousandSeparator={true} prefix='€ '/>)
 											</span>
-}
+										}
 									</label>
 									<small>{item.subtitle}</small>
 								</li>
@@ -183,7 +176,7 @@ class SimplePopover extends React.Component {
 		return (
 			<div>
 
-				<ul className={s.input} onClick={this.handleClick}>
+				<ul className={classes.input} onClick={this.handleClick}>
 					{peoples > 0 && <li>{peoples} {addon},
 						<NumberFormat value={peoples_price} displayType={'text'} decimalScale={0} thousandSeparator={true} prefix=' = € '/>
 					</li>}
@@ -199,9 +192,9 @@ class SimplePopover extends React.Component {
 					vertical: 'top',
 					horizontal: 'left'
 				}} classes={{
-					paper: s.paper
-				}}>
-					<Typography className={s.typography}>
+					paper: classes.paper
+				}} >
+					<Typography className={classes.typography}>
 						Manage your booking
 					</Typography>
 					{this.renderPopoverContent()}
@@ -212,7 +205,7 @@ class SimplePopover extends React.Component {
 }
 
 SimplePopover.propTypes = {
-	classes: PropTypes.object.isRequired,
+	// classes: PropTypes.object.isRequired,
 	data: PropTypes.array.isRequired,
 	addon: PropTypes.string.isRequired
 };

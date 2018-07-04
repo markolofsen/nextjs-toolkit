@@ -47,7 +47,6 @@ class Article extends Component {
               {t('Catalog')}
             </Typography>
 
-            {queryFolder}
             <Paginator
               page={data.page} route='catalog_page'
               params={{ lang: query.lang, folder: queryFolder }} />

@@ -33,7 +33,6 @@ const _ = require('lodash');
 
 
 @observer
-@withStyles(styles)
 class MenuGenerator extends React.Component {
 
 	state = {
@@ -127,12 +126,11 @@ class MenuGenerator extends React.Component {
 		)
 	}
 }
-
+withStyles(styles)(MenuGenerator)
 
 
 
 @observer
-@withStyles(styles)
 class MenuComponent extends React.Component {
 
 	state = {}
@@ -213,4 +211,4 @@ MenuComponent.propTypes = {
 };
 
 
-export default MenuComponent;
+export default withStyles(styles)(MenuComponent);

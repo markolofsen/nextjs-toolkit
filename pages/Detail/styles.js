@@ -3,24 +3,23 @@ import {__} from '../../style/vars'
 export const styles = theme => ({
 
 
-
 	gallerySSR: {
 	  display: 'flex',
 	},
 
-
 	offerWrapper: {
 	  background: '#fff',
 	  padding: '0 0 30px',
-		'& [data-content]': {
-			[theme.breakpoints.down('md')]: {
-		    padding: '50px 20px',
-		  },
-		  [theme.breakpoints.up('md')]: {
-		    padding: '30px 50px',
-		  },
-		},
+		// '& [data-content]': {
+		// 	[theme.breakpoints.down('md')]: {
+		//     padding: '50px 20px',
+		//   },
+		//   [theme.breakpoints.up('md')]: {
+		//     padding: '30px 50px',
+		//   },
+		// },
 	},
+
 	contentWrapper: {
 	  [theme.breakpoints.up('md')]: {
 	    display: 'flex',
@@ -69,20 +68,23 @@ export const styles = theme => ({
 	},
 
 	galleryButtons: {
-	  transition: __.transition5,
+
 	  [theme.breakpoints.down('md')]: {
 	    padding: '0 0 15px 15px',
 	  },
 	  [theme.breakpoints.up('md')]: {
-	    padding: '0 0 30px 50px',
+	    padding: '0 0 30px 30px',
 	  },
 	  '& button': {
 	    marginRight: 10,
 	  },
+		'& [data-gallery-buttons]': {
+			transition: __.transition5,
+		},
 		'& [data-gallery-buttons="false"]': {
 			margin: '-70px 0 0',
 		},
-		'& galleryButtons[data-gallery-buttons="true"]': {
+		'& [data-gallery-buttons="true"]': {
 			margin: '20px 0 0',
 		},
 	},
@@ -110,19 +112,20 @@ export const styles = theme => ({
 	/*
 	 * REVIEWS
 	 */
-	reviewsWrapper: {
+	'reviewsWrapper': {
 
 	  [theme.breakpoints.down('md')]: {
 	    marginTop: 30,
 	  },
 
-	  '& reviewsTop': {
+	  '& [data-css="reviewsTop"]': {
 	    display: 'flex',
-	    alignItems: 'center',
+			alignItems: 'center',
+	    justifyContent: 'space-between',
 	    marginBottom: 30,
 	  },
 
-	  '& reviewsList': {
+	  '& [data-css="reviewsList"]': {
 	    [theme.breakpoints.up('md')]: {
 	      maxHeight: '100vh',
 	      overflowY: 'auto',
@@ -165,8 +168,8 @@ export const styles = theme => ({
 	          },
 
 	          '& [data-li="date"]': {
-	            // font-size: var(--font-size-tiny);
-	            // color: var(--color-text-secondary);
+	            fontSize: __.fontSizeTiny,
+	            color: __.colorTextMuted,
 	            whiteSpace: 'nowrap',
 	          },
 	        },

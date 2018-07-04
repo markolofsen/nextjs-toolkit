@@ -1,5 +1,4 @@
 // import Link from 'next/link'
-import {withStyles} from '@material-ui/core/styles';
 // import withRoot from '../../utils/withRoot';
 // import Link, {prefetch} from '../../components/link'
 import L, {Link} from '../../routes'
@@ -18,7 +17,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { observable } from 'mobx'
+// import { observable } from 'mobx'
 import { observer } from 'mobx-react'
 import store from '../../data/store'
 import Helmet from 'react-helmet'
@@ -27,7 +26,9 @@ import {isBrowser, isMobile} from 'react-device-detect';
 import LeftMenu from './LeftMenu/';
 import Footer from './Footer/';
 
-import s from './index.scss'
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
+
 
 import { I18n } from '../../i18n'
 
@@ -48,119 +49,6 @@ Router.onRouteChangeError = () => NProgress.done()
 
 
 
-const drawerWidth = 240;
-
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-		height: '100%',
-		zIndex: 1,
-		overflow: 'hidden',
-		position: 'relative',
-		display: 'flex',
-		minHeight: '100vh'
-	},
-	appBar: {
-		zIndex: theme.zIndex.drawer + 1,
-		transition: theme.transitions.create([
-			'width', 'margin'
-		], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen
-		})
-	},
-	appBarShift: {
-		marginLeft: drawerWidth,
-		width: `calc(100% - ${drawerWidth}px)`,
-		transition: theme.transitions.create([
-			'width', 'margin'
-		], {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen
-		})
-	},
-	menuButton: {
-		marginLeft: 12,
-		marginRight: 0
-	},
-	hide: {
-		display: 'none'
-	},
-	drawerPaper: {
-		position: 'relative',
-		whiteSpace: 'nowrap',
-		width: drawerWidth,
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.enteringScreen
-		}),
-		height: '100%'
-	},
-	drawerPaperClose: {
-		overflowX: 'hidden',
-		transition: theme.transitions.create('width', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen
-		}),
-		width: theme.spacing.unit * 7,
-		[theme.breakpoints.up('sm')]: {
-			width: theme.spacing.unit * 9
-		},
-		"@media screen and (max-width: 960px)": {
-			maxWidth: 0,
-			border: 0
-		}
-	},
-	toolbar: {
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'flex-end',
-		padding: '0 8px',
-		...theme.mixins.toolbar
-	},
-	content: {
-		flexGrow: 1,
-		backgroundColor: theme.palette.background.default,
-		// padding: theme.spacing.unit * 3
-		minWidth: 300,
-		minHeight: '100vh',
-		flexDirection: 'column',
-		display: 'flex'
-	},
-	contentPage: {
-		flex: 1,
-		paddingTop: 64,
-		"@media screen and (max-width: 600px)": {
-			paddingTop: 56
-		}
-	},
-	guttersWrapper: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		padding: '0 !important',
-		'& > div': {
-			display: 'flex',
-			alignItems: 'center',
-			flexWrap: 'nowrap'
-		}
-	},
-
-	headerWrapper: {
-
-	},
-	headerLogo: {
-		cursor: 'pointer',
-		'& a': {
-			color: '#fff',
-			textDecoration: 'none'
-		},
-		"& sup": {
-			fontSize: 10,
-			marginLeft: 10
-		}
-	}
-});
-
 
 
 @observer
@@ -171,8 +59,8 @@ class Index extends React.Component {
   };
 
   handleDrawerOpen() {
-    store.leftMenuToggle()
     window.scrollTo(0, 0)
+    store.leftMenuToggle()
   }
 
 	setLanguage(language) {
@@ -195,6 +83,7 @@ class Index extends React.Component {
 
 	}
 	componentWillMount() {
+    store.init()
     if(isMobile) {
       store.leftMenu = false;
     }
@@ -218,7 +107,7 @@ class Index extends React.Component {
 		const { anchorEl } = this.state;
 
 		return (
-			<div className={classes.root}>
+			<div className={classNames(classes.root, classes.importantWrapper)}>
 				<Helmet
 					htmlAttributes={{lang: store.language}}
           title={`${_title} | ${store.settings.slogan}`}
@@ -269,19 +158,18 @@ class Index extends React.Component {
 					paper: classNames(classes.drawerPaper, !store.leftMenu && classes.drawerPaperClose)
 				}} open={store.leftMenu}>
 
-					{true == false && <div className={classes.toolbar}>
+					<div className={classes.toolbar}>
 						<IconButton onClick={this.handleDrawerClose}>
-							{theme.direction === 'rtl'
-								? <Icon>chevron_right_icon</Icon>
-								: <Icon>chevron_left_icon</Icon>}
+							<Icon>chevron_right_icon</Icon>
 						</IconButton>
 						<Divider/>
-					</div>}
+					</div>
 
 					<LeftMenu />
 
 				</Drawer>
 				<main className={classes.content}>
+
 					<div className={classes.contentPage}>
 							{this.props.children}
 					</div>
@@ -294,10 +182,8 @@ class Index extends React.Component {
 }
 
 Index.propTypes = {
-	classes: PropTypes.object.isRequired,
+	// classes: PropTypes.object.isRequired,
 };
 
 
-// export default withRoot(withStyles(styles)(Index));
-export default withStyles(styles)(Index);
-// export default withRoot(withStyles(styles)(Index));
+export default withStyles(styles)(Index)

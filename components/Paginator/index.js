@@ -53,20 +53,19 @@ class Paginator extends Component {
 	render() {
 		const {classes, page, route, params} = this.props
 
+		if(Number(page.pages) == 1) {
+			return <div />
+		}
 		return (
-			<div>
-				<ul className={classes.pagination}>
+			<div className={classes.pagination}>
+				<ul>
 					{range(1, page.pages).map((item, index) => {
 						// const _params = _.merge(params, {pagination: item})
 
 						return (
 							<li key={index} data-selected={page.current == item}>
 								<Link route={route}
-									params={{
-										lang: params.lang,
-										folder: params.folder,
-										pagination: item,
-									}}>
+									params={{...params, pagination: item}}>
 									<a data-link>{item}</a>
 								</Link>
 							</li>

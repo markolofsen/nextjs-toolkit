@@ -110,7 +110,7 @@ class ItemView extends Component {
                             <RatingBar rating={0} />
                         </li>
                         <li>
-                            <Link route='offer' params={{ lang: store.language, slug: data.slug }}>
+                            <Link route='offer_reviews_all' params={{ lang: store.language, slug: data.slug }}>
                               <a data-link>
                                 {t('Reviews')}
                               </a>

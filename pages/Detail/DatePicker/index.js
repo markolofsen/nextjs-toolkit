@@ -92,6 +92,7 @@ class DatePicker extends Component {
                   numberOfMonths={isBrowser ? 2 : 1}
                   firstDayOfWeek={1}
                   block
+                  placeholder={this.props.defaultValue}
                 />
             </div>
         )

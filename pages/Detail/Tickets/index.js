@@ -17,11 +17,12 @@ import BookingSelector from '../BookingSelector'
 import ModalCustomerForm from '../ModalCustomerForm/'
 import CountDown from '../../../components/CountDown/';
 import {isBrowser, isMobile} from 'react-device-detect';
+import { translate } from 'react-i18next'
 
 import s from './theme.scss'
 
 
-
+@translate('cat')
 class Tickets extends Component {
 
 	state = {
@@ -73,6 +74,7 @@ class Tickets extends Component {
 
 	renderContent(item) {
 		const {datepicker} = this.state
+		const {t} = this.props
 
 		return (
 			<div>
@@ -83,28 +85,28 @@ class Tickets extends Component {
 				<ul className={s.ticketDetails}>
 
 					{item.duration && <li>
-						<label>Duration:</label>
+						<label>{t('Duration')}:</label>
 						<div>
 							{item.duration}
 						</div>
 					</li>}
 
 					{item.include.length > 0 && <li>
-						<label>Included:</label>
+						<label>{t('Included')}:</label>
 						<div>
 							{item.include.join(', ')}
 						</div>
 					</li>}
 
 					{item.languages.length > 0 && <li>
-						<label>Languages:</label>
+						<label>{t('Languages')}:</label>
 						<div>
 							{item.languages.join(', ')}
 						</div>
 					</li>}
 
 					{isBrowser && item.bestprice && item.bestprice.expires && <li data-li="countdown">
-						<label>End of promo:</label>
+						<label>{t('End of promo')}:</label>
 						<div>
 							<CountDown date={item.bestprice.expires}/>
 						</div>
@@ -119,20 +121,20 @@ class Tickets extends Component {
 							<BookingSelector onChange={this.callbackBookingPersons} data={item.prices_fields} addon={item.prices_addon} onRef={ref => (this.refBookingSelector = ref)}/>
 						</li>
 						<li data-li="date">
-							<DatePicker data={item.available_dates} onChange={this.callbackDatepicker}/>
+							<DatePicker data={item.available_dates} onChange={this.callbackDatepicker} defaultValue={t('Date')} />
 						</li>
 						{datepicker && datepicker.times.length > 0
 							? <li data-li="time">
-									<FormSelect options={datepicker.times} defaultValue='Time' onRef={ref => (this.refTimePicker = ref)}/>
+									<FormSelect options={datepicker.times} defaultValue={t('Time')} onRef={ref => (this.refTimePicker = ref)}/>
 								</li>
 							: ''}
 						{datepicker != false && item.languages && item.languages.length > 0
 							? <li data-li="languages">
-									<FormSelect options={item.languages} defaultValue='Language' onRef={ref => (this.refLanguagePicker = ref)}/>
+									<FormSelect options={item.languages} defaultValue={t('Language')} onRef={ref => (this.refLanguagePicker = ref)}/>
 								</li>
 							: ''}
 						<li data-li="button">
-							<FormButton disabled={false} type="submit" label="Book!" fullWidth/>
+							<FormButton disabled={false} type="submit" label={t('Book!')} fullWidth/>
 						</li>
 					</ul>
 				</form>
@@ -143,7 +145,7 @@ class Tickets extends Component {
 	}
 
 	render() {
-		const {data} = this.props
+		const {data, t} = this.props
 		const {expanded} = this.state;
 
 
@@ -152,7 +154,7 @@ class Tickets extends Component {
 			<div className={s.ticketsWrapper}>
 
 				<Typography variant="headline" gutterBottom>
-					Tickets
+					{t('Tickets')}
 				</Typography>
 
 				<ModalCustomerForm onRef={ref => (this.refModalCustomerForm = ref)}/>

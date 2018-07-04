@@ -15,10 +15,12 @@ import {Link} from '../../routes'
 // import { I18n } from '../../i18n'
 import { observer } from 'mobx-react'
 import store from '../../data/store'
+import {wordPostfixPreset} from '../../data/config'
 
 import Preloader from '../../components/Preloader/'
 import ShowMore from '../../components/ShowMore/'
-import TimeAgo from 'react-timeago';
+// import TimeAgo from 'react-timeago';
+import TimeAgo from '../../components/TimeAgo/'
 import NumberFormat from 'react-number-format';
 // import {apiCatalogTicketsDetail, apiCatalogRentalsBooking} from '../../../../utils/functions'
 // import DatePicker from './DatePicker'
@@ -103,13 +105,12 @@ class ReviewsList extends Component {
 					<a data-link>{t('All reviews')}</a>
 				</Link>
 
-				<ul className={classes.reviewsTop}>
+				<ul data-css="reviewsTop">
 					<li><RatingBar rating={data.rating} size="lg"/></li>
-					<li>{data.counter}
-						reviews</li>
+					<li>{wordPostfixPreset('reviews',10)}</li>
 				</ul>
 
-				<div className={classes.reviewsList} ref={(el) => {
+				<div data-css="reviewsList" ref={(el) => {
 					this.reviewsContainer = el;
 				}} onMouseEnter={this.stopScroll}>
 					{data.data.map((item, index) => {
@@ -150,10 +151,8 @@ class ReviewsList extends Component {
 }
 
 
-
 @translate('cat')
 @observer
-@withStyles(styles)
 class PagePropertyDetail extends Component {
 
 	state = {
@@ -415,4 +414,4 @@ PagePropertyDetail.propTypes = {
 };
 
 
-export default PagePropertyDetail;
+export default withStyles(styles)(PagePropertyDetail);

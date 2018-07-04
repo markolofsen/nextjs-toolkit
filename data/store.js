@@ -25,22 +25,33 @@ class Store {
   @observable language = typeof navigator !== 'undefined' ? navigator.language || navigator.userLanguage : 'en'
 
   // fetch data
-  @action async loadSettings() {
-    this.settings = await get(`/api/system/settings/`).then(res => res.results)
-  }
+  // @action async loadSettings() {
+  //   this.settings = await get(`/api/system/settings/`).then(res => res.results)
+  // }
 
   constructor() {
-    this.loadSettings()
     console.log("new Store with: ", arguments)
+
+    // this.loadSettings()
   }
 
   @action init = async (isServer, storeData) => {
+
+
+
+    // DJANGO SETTINGS
+    this.settings = await get(`/api/system/settings/`).then(res => res.results)
+
+
+
+
     if (isServer && this.serverInited) {
       console.log("init Store[server] error: already inited")
       return
     }
     if (!isServer && this.clientInited) {
       console.log("init Store[client] error: already inited")
+
       return
     }
     console.log("init Store with: isServer = ", isServer)

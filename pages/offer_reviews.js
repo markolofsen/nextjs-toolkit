@@ -23,7 +23,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import Paginator from '../components/Paginator/';
 
 const cardStyles = {
   card: {
@@ -65,7 +65,7 @@ class ReviewsCard extends Component {
               <TimeAgo date={data.created_at} />
             </Typography>
             <Typography component="p">
-              <div dangerouslySetInnerHTML={{__html: data.text_seo}} />
+              <div dangerouslySetInnerHTML={{__html: data.text_html}} />
             </Typography>
           </CardContent>
           <CardActions>
@@ -91,9 +91,9 @@ class Article extends Component {
     // fetch data as usual
     //
     const pageNumber = typeof query.pagination !== 'undefined' ? query.pagination : 1;
-    const data = await get(`/api/catalog/tickets/reviews/${query.slug}/?page=${pageNumber}`).then(res => res.results)
+    const data = await get(`/api/catalog/tickets/reviews/${query.slug}/?page=${pageNumber}`).then(res => res)
 
-    const props = { data }
+    const props = { data, query }
     return props
   }
 
@@ -105,7 +105,7 @@ class Article extends Component {
 
 
   render () {
-    const { i18n, t, data } = this.props
+    const { i18n, t, data, query } = this.props
 
     return (
       <div>
@@ -114,8 +114,16 @@ class Article extends Component {
           _title={t('Reviews')}
           _meta={[{ property: 'og:title', content: 'Reviews' }]} >
           <div data-content>
-            {t('Reviews')}
-            {data.map((item, index) => (
+
+            <Typography variant="display1" gutterBottom>
+              {t('Reviews')}
+            </Typography>
+
+            <Paginator
+              page={data.page} route='offer_reviews'
+              params={{ lang: query.lang, slug: query.slug }} />
+
+            {data.results.map((item, index) => (
               <ReviewsCard key={index} data={item} />
             ))}
           </div>

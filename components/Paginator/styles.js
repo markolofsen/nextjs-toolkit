@@ -5,16 +5,16 @@ export const styles = theme => ({
 	pagination: {
 		width: '100%',
 		boxSizing: 'border-box',
-		position: 'fixed',
+		// position: 'fixed',
 		display: 'flex',
 		justifyContent: 'center',
-		bottom: 0,
-		left: 0,
+		// bottom: 0,
+		// left: 0,
 
 		'& > ul': {
 			display: 'inline-flex',
 			justifyContent: 'center',
-			boxShadow: __.zdepthShadow3,
+			boxShadow: __.zdepthShadow2,
 
 			'& > li': {
 

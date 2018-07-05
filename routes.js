@@ -12,10 +12,28 @@ routes.add('index', '/:lang', 'catalog')
 routes.add('offer', '/:lang/offer/:slug')
 
 
-routes.add('offer_reviews', '/:lang/offer/:slug/reviews/:pagination')
-routes.add('offer_reviews_all', '/:lang/offer/:slug/reviews', 'offer_reviews')
+// routes.add('offer_reviews', '/:lang/offer/:slug/reviews/:pagination')
+routes.add({
+  name: 'offer_reviews',
+  page: 'offer_reviews',
+  pattern: '/:lang/offer/:slug/reviews/:pagination?',
+  params: {
+    pagination: '1',
+  }
+})
+
+// routes.add('offer_reviews_all', '/:lang/offer/:slug/reviews', 'offer_reviews')
 
 
 routes.add('catalog_all', '/:lang/catalog', 'catalog')
-routes.add('catalog', '/:lang/catalog/:folder', 'catalog')
-routes.add('catalog_page', '/:lang/catalog/:folder/:pagination', 'catalog')
+// routes.add('catalog', '/:lang/catalog/:folder', 'catalog')
+routes.add({
+  name: 'catalog',
+  page: 'catalog',
+  pattern: '/:lang/catalog/:folder?/:pagination?',
+  params: {
+		folder: 'all',
+    pagination: '1',
+  }
+})
+// routes.add('catalog_page', '/:lang/catalog/:folder/:pagination', 'catalog')

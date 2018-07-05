@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const next = require('next')
+const proxy = require('http-proxy-middleware');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -21,7 +22,7 @@ const { i18nInstance } = require('./i18n')
 // const lang = express().get('*', (req, res) => { return res })
 // console.log(lang.mountpath.split('/'))
 
-
+const apiDomain = 'http://127.0.0.1:8000';
 const acceptedLangs = ['en','es','ru','fr','de'];
 
 i18nInstance
@@ -52,8 +53,42 @@ i18nInstance
         server.use('/locales', express.static(path.join(__dirname, '/locales')))
 
         // SEO
-        server.use('/seo', express.static(path.join(__dirname, '/seo')))
-        server.use('/robots.txt', express.static(path.join(__dirname, '/seo/robots.txt')))
+        // server.use('/seo', express.static(path.join(__dirname, '/seo')))
+        // server.use('/robots.txt', express.static(path.join(__dirname, '/seo/robots.txt')))
+
+
+        // PROXY
+        server.use('/robots.txt', proxy({
+          target: apiDomain,
+          changeOrigin: true,
+        }))
+        server.use('/sitemap.xml', proxy({
+          target: apiDomain,
+          changeOrigin: true,
+        }))
+        server.use('/media/', proxy({
+          target: apiDomain,
+          changeOrigin: true,
+        }))
+        server.use('/api/', proxy({
+          // target: 'http://127.0.0.1:8000',
+          target: apiDomain,
+          xfwd: true,
+          secure: true,
+          changeOrigin: true,
+          logLevel: "silent",
+          headers: {
+            cookie: ""
+          },
+          onProxyReq: (proxyReq, req, res) => {
+            if(req.url.indexOf('/?') !== -1) {
+              proxyReq.path += '&format=json';
+            } else {
+              proxyReq.path += '?format=json';
+            }
+          },
+        }))
+
 
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18nInstance))

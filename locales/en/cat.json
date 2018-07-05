@@ -1,3 +1,24 @@
 {
-  "Catalog": "Catalog",
+  "catalog_postfix": "in Tenerife",
+  "Reviews": "Reviews",
+  "From": "From",
+  "Reviews": "Reviews",
+  "All reviews": "All reviews",
+  "Show photos": "Show photos",
+  "Play video": "Play video",
+  "Tickets": "Tickets",
+
+
+  "Duration": "Duration",
+  "Included": "Included",
+  "Languages": "Languages",
+  "End of promo": "End of promo",
+  "Time": "Time",
+  "Language": "Language",
+  "Book!": "Book!",
+  "Date": "Date",
+
+  "reviews_about": "Feedbacks about «<0>{{title}}</0>» in <0>{{location}}</0>"
+
+
 }

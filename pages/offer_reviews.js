@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import fetch from 'isomorphic-unfetch'
+// import fetch from 'isomorphic-unfetch'
 import { format } from 'url'
 
 import withRoot from '../utils/withRoot';
@@ -13,7 +13,8 @@ import { withI18next } from '../lib/withI18next'
 // import Link, { prefetch } from '../components/link'
 // import {Link} from '../routes'
 // import ItemView from './Catalog/ItemView/';
-import TimeAgo from 'react-timeago';
+// import TimeAgo from 'react-timeago';
+import TimeAgo from '../components/TimeAgo/'
 
 
 import PropTypes from 'prop-types';
@@ -24,6 +25,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paginator from '../components/Paginator/';
+import ItemView from './Catalog/ItemView';
+import {Link} from '../routes'
+import { Trans } from 'react-i18next'
+
 
 const cardStyles = {
   card: {
@@ -45,10 +50,12 @@ const cardStyles = {
 };
 
 
+
+@withI18next(['cat'])
 @withStyles(cardStyles)
 class ReviewsCard extends Component {
   render() {
-    const { classes, data } = this.props;
+    const { classes, data, query, t } = this.props;
     const bull = <span className={classes.bullet}>•</span>;
 
     return (
@@ -69,7 +76,9 @@ class ReviewsCard extends Component {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Learn More</Button>
+            <Link route='offer' params={{ lang: query.lang, slug: query.slug }}><a>
+              <Button size="small">{t('Read more')}</Button>
+            </a></Link>
           </CardActions>
         </Card>
       </div>
@@ -77,7 +86,7 @@ class ReviewsCard extends Component {
   }
 }
 ReviewsCard.propTypes = {
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
 };
 
 
@@ -90,42 +99,57 @@ class Article extends Component {
 
     // fetch data as usual
     //
-    const pageNumber = typeof query.pagination !== 'undefined' ? query.pagination : 1;
+    const pageNumber = typeof query.pagination === 'string' ? query.pagination : 1;
     const data = await get(`/api/catalog/tickets/reviews/${query.slug}/?page=${pageNumber}`).then(res => res)
+    const offer = await get(`/api/catalog/tickets/short/${query.slug}/?lang=${query.lang}`).then(res => res.results)
 
-    const props = { data, query }
+    // const offer = `/api/catalog/tickets/short/${query.slug}/?lang=${query.lang}`
+
+
+    const props = { data, offer, query, pageNumber, url }
     return props
   }
 
 
-  // componentDidMount() {
-  //   this.props.i18n.initialLanguage = 'en'
-  // }
-
-
 
   render () {
-    const { i18n, t, data, query } = this.props
+    const { i18n, t, data, offer, query, pageNumber, url } = this.props
+
+    let custom_title = t('cat:reviews_about', {title: offer.title.toLowerCase(), location: offer.locations[0]})
 
     return (
       <div>
         <NavWrapper
+          _url={url}
+          _query={query}
           _i18n={i18n}
-          _title={t('Reviews')}
-          _meta={[{ property: 'og:title', content: 'Reviews' }]} >
+          _title={custom_title}
+          _meta={[{ property: 'og:title', content: custom_title }]} >
           <div data-content>
 
+            <ItemView data={offer} />
+
             <Typography variant="display1" gutterBottom>
-              {t('Reviews')}
+              {custom_title}
+              {true == false && <Trans i18nKey={`cat:reviews_about`}>
+            		{{
+                  title: offer.title.toLowerCase(),
+                  location: offer.locations[0]
+                }}
+            	</Trans>}
             </Typography>
 
-            <Paginator
-              page={data.page} route='offer_reviews'
-              params={{ lang: query.lang, slug: query.slug }} />
-
             {data.results.map((item, index) => (
-              <ReviewsCard key={index} data={item} />
+              <ReviewsCard key={index} data={item} query={query} />
             ))}
+
+            <Paginator
+              pagesTotal={Number(data.page.pages)}
+              pagesCurrent={Number(data.page.current)}
+              route='offer_reviews'
+              params={{ lang: query.lang, slug: query.slug }}
+             />
+
           </div>
         </NavWrapper>
       </div>

@@ -110,7 +110,7 @@ class ItemView extends Component {
                             <RatingBar rating={0} />
                         </li>
                         <li>
-                            <Link route='offer_reviews_all' params={{ lang: store.language, slug: data.slug }}>
+                            <Link route='offer_reviews' params={{ lang: store.language, slug: data.slug }}>
                               <a data-link>
                                 {t('Reviews')}
                               </a>
@@ -125,7 +125,7 @@ class ItemView extends Component {
 }
 
 ItemView.propTypes = {
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
 

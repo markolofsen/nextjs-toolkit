@@ -11,12 +11,14 @@ import { translate } from 'react-i18next'
 
 import theme from './theme.scss'
 
+
+@translate('common')
 export default class Footer extends Component {
 
 	state = {}
 
 	render() {
-    const {store} = this.props
+    const {store, t} = this.props
 
 		return (
 			<div className={theme.wrapper}>
@@ -26,12 +28,12 @@ export default class Footer extends Component {
 							<h3>
 								{store.settings.sitename}
 							</h3>
-							<p>{store.settings.slogan}</p>
+							<p>{t('Things to do in Tenerife')}</p>
 						</li>
 						<li data-li="menu">
 							<ul>
 								<li>
-									<Link route='catalog_all' params={{ lang: store.language }}><a>
+									<Link route='catalog' params={{ lang: store.language }}><a>
 										Home
 									</a></Link>
 								</li>

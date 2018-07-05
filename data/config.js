@@ -3,8 +3,8 @@
 export const ENV = process.env.NODE_ENV || 'development';
 export const isProduction = ENV === 'production';
 
-export const apiDomain = isProduction ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
-
+// export const apiDomain = isProduction ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
+export const apiDomain = 'http://127.0.0.1:3000';
 
 /*
  * UNIVERSAL FETCHERS

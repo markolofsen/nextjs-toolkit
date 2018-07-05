@@ -31,7 +31,7 @@ import {styles} from './styles'
 
 
 import { I18n } from '../../i18n'
-
+import { translate } from 'react-i18next'
 
 /*
  * PRELOADER
@@ -52,6 +52,7 @@ Router.onRouteChangeError = () => NProgress.done()
 
 
 @observer
+@translate('common')
 class Index extends React.Component {
 
 	state = {
@@ -63,12 +64,21 @@ class Index extends React.Component {
     store.leftMenuToggle()
   }
 
+  getCanonical = (url) => {
+    let rePath = url.asPath
+    if(typeof url.query.pagination !== 'undefined') {
+      rePath = rePath.substr(0, rePath.lastIndexOf("/"));
+    }
+    return rePath
+  }
+
 	setLanguage(language) {
 		I18n.init({
 			lng: language,
 		});
 
 		let saveRoute = L.Router.router.route.split('/')[1]
+    // alert(saveRoute)
 
 		let saveParams = L.Router.router.query
 				saveParams.lang = language
@@ -103,15 +113,18 @@ class Index extends React.Component {
   };
 
 	render() {
-		const {classes, _i18n, _title, _meta} = this.props;
+		const {classes, t, _i18n, _title, _meta, _url} = this.props;
 		const { anchorEl } = this.state;
 
 		return (
 			<div className={classNames(classes.root, classes.importantWrapper)}>
 				<Helmet
 					htmlAttributes={{lang: store.language}}
-          title={`${_title} | ${store.settings.slogan}`}
+          title={`${_title} | ${t('Things to do in Tenerife')}`}
           meta={_meta}
+          link={[
+            { rel: 'canonical', href: this.getCanonical(_url)},
+          ]}
         />
 			<AppBar position="fixed" className={classes.appBar}>
 					<Toolbar disableGutters={!store.leftMenu} className={classes.guttersWrapper}>
@@ -169,7 +182,6 @@ class Index extends React.Component {
 
 				</Drawer>
 				<main className={classes.content}>
-
 					<div className={classes.contentPage}>
 							{this.props.children}
 					</div>

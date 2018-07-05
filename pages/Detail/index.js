@@ -101,7 +101,7 @@ class ReviewsList extends Component {
 		return (
 			<div className={classes.reviewsWrapper}>
 
-				<Link route='offer_reviews_all' params={{ lang: this.props.language, slug: query.slug }}>
+				<Link route='offer_reviews' params={{ lang: this.props.language, slug: query.slug }}>
 					<a data-link>{t('All reviews')}</a>
 				</Link>
 
@@ -339,7 +339,7 @@ class PagePropertyDetail extends Component {
 	}
 
 	render() {
-		const {data, reviews, query, i18n, classes} = this.props
+		const {t, data, reviews, query, i18n, classes} = this.props
 		const {render} = this.state
 
 		// if (!data) {
@@ -358,14 +358,19 @@ class PagePropertyDetail extends Component {
 
 							<ul className={classes.contentHeader}>
 								<li>
-									{data.categories.map((category, c) => {
-										return (
-											<span key={c}>
-												<strong index={c}>{category.label}</strong>
-												{c < data.categories.length - 1 && ', '}
-											</span>
-										)
-									})}
+									<ul data-css="categories">
+										{data.categories.map((category, c) => {
+											return (
+												<li key={c}>
+													<Link route='catalog' params={{ lang: store.language, folder: category.slug }}>
+														<a data-link>
+															<strong index={c}>{t(category.name)}</strong>
+														</a>
+													</Link>
+												</li>
+											)
+										})}
+									</ul>
 								</li>
 								<li>
 									<Typography variant="display1">

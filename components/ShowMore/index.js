@@ -3,11 +3,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
 // import { withRouter } from 'react-router-dom'
 import Collapse from '@material-ui/core/Collapse';
+import { translate } from 'react-i18next'
 
-import s from './theme.scss'
 
+
+
+@withStyles(styles)
+@translate('cat')
 class Block extends Component {
 
 	state = {
@@ -27,7 +32,7 @@ class Block extends Component {
 	render() {
 
 		const {open} = this.state
-		const {text, height} = this.props
+		const {t, classes, text, height} = this.props
 
 		let height_ = height
 			? height
@@ -35,7 +40,7 @@ class Block extends Component {
 
 		if (text.length < 300) {
 			return (
-				<div className={s.contentFormat}>
+				<div className={classes.contentFormat}>
 					<div dangerouslySetInnerHTML={{
 						__html: text
 					}}/>
@@ -44,16 +49,16 @@ class Block extends Component {
 		}
 		return (
 			<div>
-				<div className={s.contentFormat}>
+				<div className={classes.contentFormat}>
 					<Collapse in={open} collapsedHeight={`${height_}px`}>
-						<div className={s.contentFormat} dangerouslySetInnerHTML={{
+						<div className={classes.contentFormat} dangerouslySetInnerHTML={{
 							__html: text
 						}}/>
 					</Collapse>
 
 					<div data-el="more">
 						<span onClick={this.switcher}>
-							Развернуть
+							{t('Read more')}
 						</span>
 					</div>
 				</div>
@@ -63,8 +68,8 @@ class Block extends Component {
 }
 
 Block.propTypes = {
-	classes: PropTypes.object.isRequired,
+	// classes: PropTypes.object.isRequired,
 	text: PropTypes.string.isRequired
 };
 
-export default withStyles(s)(Block);
+export default Block;

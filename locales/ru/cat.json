@@ -1,5 +1,16 @@
 {
-  "Catalog": "Каталог",
+
+  "Things To Do": "Развлечения",
+  "Boat trips": "Морские прогулки",
+  "Water sports": "Водный спорт",
+  "Extreme": "Экстрим",
+  "Active tourism": "Активный туризм",
+  "Sightseeing tours": "Обзорные экскурсии",
+  "Entertainments": "Развлечения",
+  "Master classes": "Мастер-классы",
+  "Other": "Другое",
+
+  "catalog_postfix": "на Тенерифе",
   "Reviews": "Каталог",
   "From": "От",
   "Reviews": "Отзывы",
@@ -16,7 +27,13 @@
   "Time": "Время",
   "Language": "Язык",
   "Book!": "Заказать!",
-  "Date": "Дата"
+  "Date": "Дата",
+
+  "reviews_about": "Отзывы о «{{title}}» в {{location}}",
+  "reviews_about_OLD": "Отзывы о «<0>{{title}}</0>» в <0>{{location}}</0>",
+
+
+  "Read more": "Подробнее"
 
 
 }

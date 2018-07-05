@@ -25,7 +25,7 @@ export const styles = theme => ({
 	    display: 'flex',
 	    justifyContent: 'space-between',
 	    marginBottom: 30,
-	    padding: '30px 0 0',
+	    padding: 0,
 	  },
 
 	  '& > li': {
@@ -94,6 +94,18 @@ export const styles = theme => ({
 	 * HEADER
 	 */
 	contentHeader: {
+		'& [data-css="categories"]': {
+			display: 'flex',
+			marginBottom: 30,
+			'& > li': {
+				marginRight: 10,
+				paddingRight: 10,
+				borderRight: `solid 1px ${__.colorDivider}`,
+			},
+			'& > li:last-child': {
+				border: 0,
+			},
+		},
 	  '& [data-li="location"]': {
 	    display: 'flex',
 	    alignContent: 'center',

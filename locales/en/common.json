@@ -1,11 +1,6 @@
 {
-  "integrates_react-i18next": "This example integrates react-i18next for simple internationalization.",
-  "pureComponent": "You can either pass t function to child components.",
-  "extendedComponent": "Or wrap your component using the translate hoc provided by react-i18next.",
-  "transComponent": "Alternatively, you can use <1>Trans</1> component.",
-
-
-  "review_one": "review",
-  "review_three": "reviews",
-  "review_ten": "reviews"
+  "Things to do in Tenerife": "Things to do in Tenerife",
+  "review_one": "<0>{{number}}</0> review",
+  "review_three": "<0>{{number}}</0> reviews",
+  "review_ten": "<0>{{number}}</0> reviews"
 }

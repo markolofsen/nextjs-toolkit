@@ -9,6 +9,7 @@ import {Link} from '../../../routes'
 // import { I18n } from '../../../i18n'
 import { observer } from 'mobx-react'
 import store from '../../../data/store'
+import { translate } from 'react-i18next'
 
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -31,7 +32,7 @@ const _ = require('lodash');
 // import s from './theme.scss'
 
 
-
+@translate('cat')
 @observer
 class MenuGenerator extends React.Component {
 
@@ -49,7 +50,7 @@ class MenuGenerator extends React.Component {
 	};
 
 	render() {
-		const {label, route} = this.props
+		const {label, route, t} = this.props
 		const {menu} = this.state
 
 		if (!menu) {
@@ -67,7 +68,7 @@ class MenuGenerator extends React.Component {
 									<ListItemIcon>
 										<Icon>{item.icon}</Icon>
 									</ListItemIcon>
-									<ListItemText inset primary={item.label}/> {this.state.open
+									<ListItemText inset primary={t(item.label)}/> {this.state.open
 										? <Icon>expand_less</Icon>
 										: <Icon>expand_more</Icon>}
 								</ListItem>
@@ -85,7 +86,7 @@ class MenuGenerator extends React.Component {
 												<div key={`subindex-${index}-${subindex}`}>
 													<Link route={route} params={params_}><a>
 														<ListItem button dense>
-															<ListItemText primary={subitem.label}/>
+															<ListItemText primary={t(subitem.label)}/>
 														</ListItem>
 													</a></Link>
 												</div>

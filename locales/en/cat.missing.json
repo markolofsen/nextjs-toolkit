@@ -2,5 +2,35 @@
   "Show photos": "Show photos",
   "Play video": "Play video",
   "All reviews": "All reviews",
-  "Catalog": "Catalog"
+  "Read more": "Read more",
+  "catalog_title": "<0>{{title}}</0>",
+  "data": {
+    "meta": {
+      "title": "data.meta.title"
+    }
+  },
+  "None": "None",
+  "Boat Trips": "Boat Trips",
+  "Catalog example": "Catalog example",
+  "Entertainments": "Entertainments",
+  "Parks": "Parks",
+  "Aqualand Costa Adeje": "Aqualand Costa Adeje",
+  "Safari": "Safari",
+  "Сафари": "Сафари",
+  "Home": "Home",
+  "Water sports": "Water sports",
+  "Diving": "Diving",
+  "Боб": "Боб",
+  "Things to do in Tenerife": "Things to do in Tenerife",
+  "Boat trips": "Boat trips",
+  "Speed boats": "Speed boats",
+  "6 красных крупных перцев": "6 красных крупных перцев",
+  "\"Arriro\", yate de lujo": {
+    "": "\"Arriro\", yate de lujo."
+  },
+  "Stand Up Paddle": "Stand Up Paddle",
+  "Stand Up Paddel Rental": "Stand Up Paddel Rental",
+  "Active tourism": "Active tourism",
+  "Adventure": "Adventure",
+  "Top Buggy Adventure": "Top Buggy Adventure"
 }

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import {styles} from './styles'
 import {Link} from '../../routes'
+import Preloader from '../Preloader'
 
+import BottomScrollListener from 'react-bottom-scroll-listener';
 import { observer } from 'mobx-react'
 import store from '../../data/store'
 
@@ -50,20 +52,63 @@ function range(min, max, delta) {
 @observer
 @withStyles(styles)
 class Paginator extends Component {
-	render() {
-		const {classes, page, route, params} = this.props
 
-		if(Number(page.pages) == 1) {
+	constructor(props) {
+    super(props);
+    this.state = {
+      pages_arr: [],
+			paginator_visible: true,
+			preloader: false,
+    }
+
+    this.scrollCallback = this.scrollCallback.bind(this);
+  }
+
+	componentDidMount() {
+		const {pagesCurrent, pagesTotal} = this.props
+		let pages_arr = range(1, pagesTotal)
+				pages_arr = pages_arr.filter(e => e !== pagesCurrent)
+
+			this.setState({pages_arr})
+	}
+
+	async scrollCallback() {
+		
+		const {loadMore, loadMoreParams} = this.props
+		const {pages_arr, preloader} = this.state
+
+		if(typeof loadMore !== 'undefined') {
+
+			this.setState({paginator_visible: false})
+
+			if(pages_arr.length > 0 && !preloader) {
+				this.setState({preloader: true})
+
+				const page = pages_arr[0]
+				this.setState({pages_arr: pages_arr.slice(1)})
+				await loadMore({...loadMoreParams, page}).then(res => {
+					this.setState({preloader: false})
+					return res
+				})
+			}
+		}
+	}
+
+
+	render() {
+		const {classes, pagesTotal, pagesCurrent, route, params} = this.props
+		const {paginator_visible, preloader} = this.state
+
+		if(pagesTotal == 1) {
 			return <div />
 		}
 		return (
 			<div className={classes.pagination}>
+				{paginator_visible &&
 				<ul>
-					{range(1, page.pages).map((item, index) => {
-						// const _params = _.merge(params, {pagination: item})
-
+					{range(1, pagesTotal).map((item, index) => {
 						return (
-							<li key={index} data-selected={page.current == item}>
+							<li key={index} data-selected={pagesCurrent == item}>
 								<Link route={route}
 									params={{...params, pagination: item}}>
 									<a data-link>{item}</a>
@@ -71,7 +116,11 @@ class Paginator extends Component {
 							</li>
 						)
 					})}
-				</ul>
+				</ul>}
+
+				{preloader && <Preloader />}
+
+				<BottomScrollListener onBottom={this.scrollCallback} offset={200} debounce={10} />
 			</div>
 		)
 	}
@@ -79,9 +128,12 @@ class Paginator extends Component {
 
 Paginator.propTypes = {
 	// classes: PropTypes.object.isRequired,
-	page: PropTypes.object.isRequired,
+	pagesTotal: PropTypes.number.isRequired,
+	pagesCurrent: PropTypes.number.isRequired,
 	params: PropTypes.object.isRequired,
 	route: PropTypes.string.isRequired,
+	// loadMore: PropTypes.func.isRequired,
+	// loadMoreParams: PropTypes.object.isRequired,
 };
 
 export default Paginator

@@ -40,6 +40,7 @@
     "react-dates": "^17.0.0",
     "react-device-detect": "^1.4.6",
     "react-dom": "16.3.2",
+    "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
     "react-i18next": "7.3.6",
     "react-image-gallery": "^0.8.9",
@@ -52,6 +53,7 @@
     "screenfull": "^3.3.2"
   },
   "devDependencies": {
+    "@babel/plugin-transform-react-jsx-source": "^7.0.0-beta.52",
     "babel-plugin-module-resolver": "*",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "*",

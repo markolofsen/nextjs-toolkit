@@ -6,6 +6,7 @@ export const isProduction = ENV === 'production';
 // export const apiDomain = isProduction ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
 export const apiDomain = 'http://127.0.0.1:3000';
 
+export const googleMapKey = 'AIzaSyAOM0YBxdT7Ot7DFgjd5dWduGFhEUXIm_E';
 /*
  * UNIVERSAL FETCHERS
  */

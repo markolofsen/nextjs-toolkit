@@ -25,7 +25,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paginator from '../components/Paginator/';
-import ItemView from './Catalog/ItemView';
+import ItemView from './Catalog/ItemView/';
 import {Link} from '../routes'
 import { Trans } from 'react-i18next'
 

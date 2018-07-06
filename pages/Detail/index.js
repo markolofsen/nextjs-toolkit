@@ -26,7 +26,7 @@ import NumberFormat from 'react-number-format';
 // import DatePicker from './DatePicker'
 // import FormField from '../../../BlockForm/FormField'
 // import FormButton from '../../../BlockForm/FormButton'
-// import GoogleMap from '../../../components/GoogleMap/'
+import GoogleMap from '../../components/GoogleMap/';
 import GalleryModal from '../../components/GalleryModal/'
 import Player from '../../components/Player/'
 import RatingBar from '../../components/RatingBar/';
@@ -386,6 +386,9 @@ class PagePropertyDetail extends Component {
 								{this.renderDetails()}
 
 								{this.renderBookingForm()}
+
+
+								<GoogleMap lat={data.location.lat} lng={data.location.lng} />
 
 							</ul>
 

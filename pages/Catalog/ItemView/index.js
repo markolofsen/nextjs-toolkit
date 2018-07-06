@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // import { withRouter } from 'react-router-dom'
 // import withSSR from '../../../components/withSSR';
 // import Link from 'next/link'
-import {Link} from '../../routes'
+import {Link} from '../../../routes'
 // import { I18n } from '../../i18n'
 import { translate } from 'react-i18next'
 
@@ -16,11 +16,11 @@ import Typography from '@material-ui/core/Typography';
 // import Icon from 'material-ui/Icon';
 
 import { observer } from 'mobx-react'
-import store from '../../data/store'
+import store from '../../../data/store'
 // import {language} from '../../data/config'
 
-import CountDown from '../../components/CountDown/';
-import RatingBar from '../../components/RatingBar/';
+import CountDown from '../../../components/CountDown/';
+import RatingBar from '../../../components/RatingBar/';
 import NumberFormat from 'react-number-format';
 import {isBrowser, isMobile} from 'react-device-detect';
 
@@ -66,7 +66,7 @@ class ItemView extends Component {
                     <ul data-ul="header">
                         <li>
                             <Typography variant="title">
-                                <Link route='offer' params={{ lang: store.language, slug: data.slug }}>
+                              <Link route='offer' params={{ lang: store.language, slug: data.slug }}>
                                   <a data-link>{data.title}</a>
                               </Link>
                             </Typography>

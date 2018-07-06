@@ -18,7 +18,7 @@
   "Book!": "Book!",
   "Date": "Date",
 
-  "reviews_about": "Feedbacks about «<0>{{title}}</0>» in <0>{{location}}</0>"
+  "reviews_about": "Feedbacks about «{{title}}» in {{location}}"
 
 
 }

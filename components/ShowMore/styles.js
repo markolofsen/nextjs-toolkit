@@ -25,7 +25,7 @@ export const styles = theme => ({
 		},
 
 		'& [data-el="more"]': {
-			marginTop: 30,
+			marginTop: 15,
 			'& > span': {
 				display: 'inline-block',
 				padding: '5px 20px',
@@ -33,12 +33,13 @@ export const styles = theme => ({
 				borderRadius: 50,
 				cursor: 'pointer',
 				transition: __.transition2,
-				background: __.colorPrimary,
-				color: '#fff',
-			},
-			'& > span:hover': {
 				background: '#fff',
 				color: __.colorPrimary,
+
+			},
+			'& > span:hover': {
+				background: __.colorPrimary,
+				color: '#fff',
 			}
 		}
 	}

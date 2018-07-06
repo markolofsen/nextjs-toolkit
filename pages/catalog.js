@@ -8,9 +8,11 @@ import { withI18next } from '../lib/withI18next'
 import Typography from '@material-ui/core/Typography';
 import NavWrapper from './NavWrapper/';
 import ItemView from './Catalog/ItemView';
+import CatalogFilters from './Catalog/CatalogFilters';
 import Paginator from '../components/Paginator/';
 import ShowMore from '../components/ShowMore'
 import Breadcrumbs from '../components/Breadcrumbs/';
+
 
 import { Trans } from 'react-i18next'
 
@@ -115,6 +117,14 @@ class Article extends Component {
               </Typography>
 
               <ShowMore text={data.meta.description_full} height={60}/>
+
+              {data.meta.categories &&
+                <CatalogFilters
+                  t={t}
+                  currentSlug={query.folder}
+                  lang={query.lang}
+                  data={data.meta.categories} />}
+
 
              {data.results.map((item, index) => (
                 <ItemView data={item} key={index} />

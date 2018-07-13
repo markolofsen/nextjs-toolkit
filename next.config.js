@@ -1,22 +1,22 @@
 const path = require('path')
 const webpack = require('webpack')
-const withSass = require('@zeit/next-sass')
-const autoprefixer = require('autoprefixer');
+// const withSass = require('@zeit/next-sass')
+// const autoprefixer = require('autoprefixer');
 
-module.exports = withSass({
-  plugins: [
-    {
-      autoprefixer: {},
-    },
-    {
-      'postcss-css-variables': {},
-    }
-  ],
-  cssModules: true,
-  cssLoaderOptions: {
-    importLoaders: 1,
-    localIdentName: "[local]___[hash:base64:5]",
-  },
+module.exports = {
+  // plugins: [
+  //   {
+  //     autoprefixer: {},
+  //   },
+  //   {
+  //     'postcss-css-variables': {},
+  //   }
+  // ],
+  // cssModules: true,
+  // cssLoaderOptions: {
+  //   importLoaders: 1,
+  //   localIdentName: "[local]___[hash:base64:5]",
+  // },
 
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
 
@@ -44,4 +44,4 @@ module.exports = withSass({
     }
     return config
   },
-});
+};

@@ -30,6 +30,7 @@ class Offer extends Component {
     // return <h1>{offer.system_name}</h1>
     return (
       <NavWrapper
+        _query={query}
         _url={url}
         _i18n={i18n}
         _title={data.title}

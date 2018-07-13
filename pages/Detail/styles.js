@@ -126,9 +126,7 @@ export const styles = theme => ({
 	 */
 	'reviewsWrapper': {
 
-	  [theme.breakpoints.down('md')]: {
-	    marginTop: 30,
-	  },
+	  marginTop: 30,
 
 	  '& [data-css="reviewsTop"]': {
 	    display: 'flex',
@@ -138,11 +136,11 @@ export const styles = theme => ({
 	  },
 
 	  '& [data-css="reviewsList"]': {
-	    [theme.breakpoints.up('md')]: {
-	      maxHeight: '100vh',
-	      overflowY: 'auto',
-	      position: 'sticky',
-	    },
+	    // [theme.breakpoints.up('md')]: {
+	    //   // maxHeight: '100vh',
+	    //   // overflowY: 'auto',
+	    //   // position: 'sticky',
+	    // },
 
 	    '& [data-block="review"]': {
 	      margin: '0 0 20px',

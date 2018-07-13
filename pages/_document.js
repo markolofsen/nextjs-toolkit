@@ -73,11 +73,12 @@ class MyDocument extends Document {
           />
 
           <meta name="theme-color" content={pageContext.theme.palette.primary.main} />
-          <link rel="stylesheet" href="/_next/static/style.css" />
-          <link rel='stylesheet' type='text/css' href='/static/nprogress.css' />
-          <link rel='stylesheet' type='text/css' href='/static/react-dates.css' />
-          <link rel='stylesheet' type='text/css' href='/static/gallery.css' />
-          <link rel='stylesheet' type='text/css' href='/static/screen.css' />
+          <link rel='stylesheet' type='text/css' href='/css/nprogress.css' />
+          <link rel='stylesheet' type='text/css' href='/css/react-dates.css' />
+          <link rel='stylesheet' type='text/css' href='/css/gallery.css' />
+          <link rel='stylesheet' type='text/css' href='/css/screen.css' />
+          <link rel="icon" type="image/png" href="/favicon.png" />
+
 
           <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -97,6 +98,12 @@ class MyDocument extends Document {
             gtag('config', '${GA_TRACKING_ID}');
           `}}
           />
+          {/* <script dangerouslySetInnerHTML={{`
+            if(typeof window !== 'undefined') {
+              window.reload()
+            }
+          `}} /> */}
+
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />

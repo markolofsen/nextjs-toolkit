@@ -2,15 +2,12 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+// import {withStyles} from '@material-ui/core/styles';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import ReactMomentCountDown from 'react-moment-countdown';
 import moment from 'moment';
 
-import theme from './theme.scss'
-
-const styles = {};
 
 class Block extends Component {
 
@@ -18,17 +15,19 @@ class Block extends Component {
 		value: false
 	}
 
-
 	render() {
 
 		const {value} = this.state
-        const {date, ...other} = this.props
+		const {
+			date,
+			...other
+		} = this.props
 
 		const dateInFuture = moment(date);
 
 		return (
 			<div {...other}>
-				<ReactMomentCountDown toDate={dateInFuture} sourceFormatMask='YYYY-MM-DD HH:mm:ss' />
+				<ReactMomentCountDown toDate={dateInFuture} sourceFormatMask='YYYY-MM-DD HH:mm:ss'/>
 			</div>
 		)
 	}
@@ -39,4 +38,4 @@ Block.propTypes = {
 	date: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(Block);
+export default Block;

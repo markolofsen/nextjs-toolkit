@@ -12,7 +12,7 @@ import CatalogFilters from './Catalog/CatalogFilters';
 import Paginator from '../components/Paginator/';
 import ShowMore from '../components/ShowMore'
 import Breadcrumbs from '../components/Breadcrumbs/';
-
+import GoogleMap from '../components/GoogleMapCatalog';
 
 import { Trans } from 'react-i18next'
 
@@ -98,6 +98,7 @@ class Article extends Component {
     return (
       <div>
         <NavWrapper
+          _query={query}
           _url={url}
           _i18n={i18n}
           _title={catalog_title}
@@ -110,6 +111,8 @@ class Article extends Component {
             {data.meta.breadcrumbs && <Breadcrumbs
               lang={query.lang}
               data={data.meta.breadcrumbs} /> }
+
+            <GoogleMap lang={query.lang} />
 
             <div data-content>
               <Typography variant="display1" gutterBottom>

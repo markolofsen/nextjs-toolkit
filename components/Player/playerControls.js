@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // import {withRouter} from 'react-router';
-import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,16 +14,11 @@ import Icon from '@material-ui/core/Icon';
 
 import Duration from './Duration';
 
-import theme from './theme.scss';
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
 
 
-const styles = mui => ({
-  buttonApproved: {
-      width: '100%',
-      display: 'block',
-  },
-});
-
+@withStyles(styles)
 class PlayerControls extends Component {
 
 	render() {
@@ -40,9 +34,9 @@ class PlayerControls extends Component {
 
 		return (
 			<div>
-				<ul className={theme.playerControls}>
+				<ul className={classes.playerControls}>
 					<li>
-						<ul className={theme.playerControlsButtons}>
+						<ul className={classes.playerControlsButtons}>
 							<li>
 								<IconButton aria-label="Play" onClick={this.props.playPause}>
 									{playing
@@ -50,12 +44,12 @@ class PlayerControls extends Component {
 										: <Icon>play_arrow</Icon>}
 								</IconButton>
 							</li>
-							<li className={theme.playerControlsNoMobile}>
+							<li className={classes.playerControlsNoMobile}>
 								<IconButton aria-label="Fullscreen" onClick={this.props.onClickFullscreen}>
 									<Icon>fullscreen</Icon>
 								</IconButton>
 							</li>
-							<li className={theme.playerControlsNoMobile}>
+							<li className={classes.playerControlsNoMobile}>
 								<IconButton aria-label="Play" onClick={this.props.toggleMuted}>
 									{muted
 										? <Icon>volume_mute</Icon>
@@ -64,12 +58,12 @@ class PlayerControls extends Component {
 							</li>
 						</ul>
 					</li>
-					<li className={theme.playerControlsDuration}>
+					<li className={classes.playerControlsDuration}>
 						<Duration seconds={played * duration}/>
 						/
 						<Duration seconds={duration}/>
 					</li>
-					<li className={theme.playerControlsNoMobile}>
+					<li className={classes.playerControlsNoMobile}>
 						<FormControlLabel control={< Switch checked = {
 							playbackRate == 3
 								? true
@@ -94,9 +88,9 @@ class PlayerControls extends Component {
 }
 
 PlayerControls.propTypes = {
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
 };
 
 
 export default
-connect((mapStateToProps) => (mapStateToProps), dispatch => ({}))(withStyles(styles)(PlayerControls));
+connect((mapStateToProps) => (mapStateToProps), dispatch => ({}))(PlayerControls);

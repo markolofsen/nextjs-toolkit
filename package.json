@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js -p 8002",
+    "port": "next start -p $PORT"
   },
   "author": "",
   "license": "MIT",
@@ -48,9 +49,12 @@
     "react-moment-countdown": "^0.3.0",
     "react-number-format": "^3.4.2",
     "react-player": "^1.6.4",
+    "react-stickynode": "^2.0.1",
     "react-timeago": "^4.1.9",
     "remove": "^0.1.5",
-    "screenfull": "^3.3.2"
+    "screenfull": "^3.3.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx-source": "^7.0.0-beta.52",

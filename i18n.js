@@ -10,7 +10,8 @@ const options = {
   ns: ['common'],
   defaultNS: 'common',
 
-  debug: process.env.NODE_ENV !== 'production',
+  // debug: process.env.NODE_ENV !== 'production',
+  debug: false,
   saveMissing: true,
 
   whitelist: ['en','es','ru','fr','de'],

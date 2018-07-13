@@ -56,9 +56,9 @@ class ItemView extends Component {
         return (
             <ul data-box className={classes.itemBox}>
                 <li data-li="preview">
-                  {data.image_preview &&
+                  {data.preview &&
                     <Link route='offer' params={{ lang: store.language, slug: data.slug }}>
-                      <a><img src={data.image_preview} /></a>
+                      <a><img src={data.preview} /></a>
                     </Link>}
                 </li>
                 <li data-li="details">

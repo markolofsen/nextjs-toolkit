@@ -2,6 +2,8 @@ import { action, observable } from 'mobx'
 // import axios from 'axios';
 import { I18n } from '../i18n'
 import {get} from './config';
+import {isBrowser, isMobile} from 'react-device-detect';
+
 
 class Store {
   @observable isServer = false
@@ -19,15 +21,19 @@ class Store {
 
   @observable now = ""
 
-
-  @observable leftMenu = true
+  @observable sitename = 'TenerifeBook.com'
   @observable settings = false
+  @observable leftMenu = isBrowser
   @observable language = typeof navigator !== 'undefined' ? navigator.language || navigator.userLanguage : 'en'
 
   // fetch data
   // @action async loadSettings() {
   //   this.settings = await get(`/api/system/settings/`).then(res => res.results)
   // }
+  @action
+  leftMenuToggle = () => {
+    this.leftMenu = !this.leftMenu
+  }
 
   constructor() {
     console.log("new Store with: ", arguments)
@@ -102,9 +108,6 @@ class Store {
   }
 
 
-  @action leftMenuToggle = () => {
-    this.leftMenu = !this.leftMenu
-  }
   @action languageUpdate = () => {
     this.language = I18n.language
   }

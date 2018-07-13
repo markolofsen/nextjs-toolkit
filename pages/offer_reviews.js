@@ -120,6 +120,7 @@ class Article extends Component {
     return (
       <div>
         <NavWrapper
+          _query={query}
           _url={url}
           _query={query}
           _i18n={i18n}

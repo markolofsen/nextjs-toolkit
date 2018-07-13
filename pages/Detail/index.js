@@ -22,6 +22,7 @@ import ShowMore from '../../components/ShowMore/'
 // import TimeAgo from 'react-timeago';
 import TimeAgo from '../../components/TimeAgo/'
 import NumberFormat from 'react-number-format';
+import Sticky from 'react-stickynode';
 // import {apiCatalogTicketsDetail, apiCatalogRentalsBooking} from '../../../../utils/functions'
 // import DatePicker from './DatePicker'
 // import FormField from '../../../BlockForm/FormField'
@@ -30,6 +31,7 @@ import GoogleMap from '../../components/GoogleMap/';
 import GalleryModal from '../../components/GalleryModal/'
 import Player from '../../components/Player/'
 import RatingBar from '../../components/RatingBar/';
+import CardView from '../Catalog/CardView/';
 
 // import BookingSelector from './BookingSelector/'
 // import ProfileBlock from '../../Profile/ProfileBlock'
@@ -91,15 +93,26 @@ class ReviewsList extends Component {
 
 	render() {
 
-		const {data, query, t, i18n, classes} = this.props
+		const {data, query, t, i18n, classes, title, location} = this.props
 
 		if (!data.rating) {
 			return <div/>
 		}
 
+		let custom_title = t('cat:reviews_about', {title: title.toLowerCase(), location: location})
+
 
 		return (
 			<div className={classes.reviewsWrapper}>
+
+
+				<Typography variant="headline" gutterBottom>
+					<Link route='offer_reviews' params={{ lang: this.props.language, slug: query.slug }}>
+						<a data-link>
+							{custom_title}
+						</a>
+					</Link>
+				</Typography>
 
 				<Link route='offer_reviews' params={{ lang: this.props.language, slug: query.slug }}>
 					<a data-link>{t('All reviews')}</a>
@@ -342,9 +355,7 @@ class PagePropertyDetail extends Component {
 		const {t, data, reviews, query, i18n, classes} = this.props
 		const {render} = this.state
 
-		// if (!data) {
-		// 	return <Preloader/>
-		// }
+		const bottomBoundary = typeof window !== 'undefined' && typeof document !== 'undefined' ? document.body.scrollHeight - 300 : 0
 
 		return (
 			<div className={classes.offerWrapper}>
@@ -393,9 +404,21 @@ class PagePropertyDetail extends Component {
 							</ul>
 
 
+							<ReviewsList
+								data={data.reviews}
+								query={query}
+								i18n={i18n}
+								language={store.language}
+								title={data.title}
+								location={data.location.city}
+							/>
+
+
 						</li>
 						<li data-li="right">
-							<ReviewsList data={data.reviews} query={query} i18n={i18n} language={store.language}/>
+							<Sticky enabled={true} top={80} bottomBoundary={bottomBoundary}>
+									<CardView />
+							</Sticky>
 						</li>
 					</ul>
 
@@ -411,6 +434,7 @@ class PagePropertyDetail extends Component {
 					</ul>}
 
 				</div>
+
 
 			</div>
 		)

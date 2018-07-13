@@ -3,16 +3,21 @@
 export const ENV = process.env.NODE_ENV || 'development';
 export const isProduction = ENV === 'production';
 
-// export const apiDomain = isProduction ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:8000';
-export const apiDomain = 'http://127.0.0.1:3000';
+// export const apiDomain = isProduction ? 'https://tenerifebook.com' : 'http://127.0.0.1:8000';
+export const apiDomain = 'https://api.tenerifebook.com';
 
 export const googleMapKey = 'AIzaSyAOM0YBxdT7Ot7DFgjd5dWduGFhEUXIm_E';
+
+
 /*
  * UNIVERSAL FETCHERS
  */
 import axios from 'axios';
 export async function get(path) {
-	return await axios.get(`${apiDomain}${path}`).then(res => res.data)
+	const url = `${apiDomain}${path}`
+	console.log('---------')
+	console.log(url)
+	return await axios.get(url).then(res => res.data)
 }
 
 

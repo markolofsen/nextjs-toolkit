@@ -1,23 +1,26 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 // import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import Icon from '@material-ui/core/Icon';
 
-import s from './theme.scss'
 
 
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
+
+
+@withStyles(styles)
 class Block extends Component {
 
     render() {
 
-        const {rating, size} = this.props
+        const {classes, rating, size} = this.props
 
         // if(rating == false) {
         //     return <div />
         // }
         return (
-            <ul className={s.ratingWrapper} data-size={size}>
+            <ul className={classes.ratingWrapper} data-size={size}>
                 <li data-li="star">
                     {rating <= 1 ? <Icon>star_border</Icon> : ''}
                     {rating > 1 && rating < 4 ? <Icon>star_half</Icon> : ''}

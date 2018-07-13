@@ -55,14 +55,19 @@ Router.onRouteChangeError = () => NProgress.done()
 @translate('common')
 class Index extends React.Component {
 
-	state = {
-    anchorEl: null,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      anchorEl: null,
+    }
+  }
 
-  handleDrawerOpen() {
+
+  handleDrawerOpen = () => {
     window.scrollTo(0, 0)
     store.leftMenuToggle()
   }
+
 
   getCanonical = (url) => {
     let rePath = url.asPath
@@ -92,15 +97,24 @@ class Index extends React.Component {
 		this.handleClose()
 
 	}
-	componentWillMount() {
+  componentWillMount() {
     store.init()
-    if(isMobile) {
-      store.leftMenu = false;
-    }
-	}
+  }
+
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     store.languageUpdate()
+  }
+
+  componentDidMount() {
+
+    // First reload for apply css styles
+  	// if (window.sessionStorage) {
+  	// 	if (!sessionStorage.getItem('firstLoad')) {
+  	// 		sessionStorage['firstLoad'] = true
+  	// 		window.location.reload()
+  	// 	}
+  	// }
   }
 
 
@@ -113,13 +127,13 @@ class Index extends React.Component {
   };
 
 	render() {
-		const {classes, t, _i18n, _title, _meta, _url} = this.props;
+		const {classes, t, _i18n, _title, _meta, _url, _query} = this.props;
 		const { anchorEl } = this.state;
 
 		return (
 			<div className={classNames(classes.root, classes.importantWrapper)}>
 				<Helmet
-					htmlAttributes={{lang: store.language}}
+					htmlAttributes={{lang: _query.lang}}
           title={`${_title} | ${t('Things to do in Tenerife')}`}
           meta={_meta}
           link={[
@@ -135,7 +149,7 @@ class Index extends React.Component {
 							<Typography variant="title" color="inherit" noWrap className={classes.headerLogo}>
 								<Link route='index' params={{ lang: store.language }}>
 									<a>
-										<span>{store.settings.sitename}</span>
+										<span>{store.sitename}</span>
 										<sup>(1.1)</sup>
 									</a>
 								</Link>

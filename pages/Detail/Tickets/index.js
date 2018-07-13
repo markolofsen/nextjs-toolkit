@@ -19,9 +19,11 @@ import CountDown from '../../../components/CountDown/';
 import {isBrowser, isMobile} from 'react-device-detect';
 import { translate } from 'react-i18next'
 
-import s from './theme.scss'
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
 
 
+@withStyles(styles)
 @translate('cat')
 class Tickets extends Component {
 
@@ -74,15 +76,15 @@ class Tickets extends Component {
 
 	renderContent(item) {
 		const {datepicker} = this.state
-		const {t} = this.props
+		const {classes, t} = this.props
 
 		return (
 			<div>
-				<div className={s.ticketDescription}>
+				<div className={classes.ticketDescription}>
 					<ShowMore text={item.description} height={60}/>
 				</div>
 
-				<ul className={s.ticketDetails}>
+				<ul className={classes.ticketDetails}>
 
 					{item.duration && <li>
 						<label>{t('Duration')}:</label>
@@ -115,7 +117,7 @@ class Tickets extends Component {
 				</ul>
 
 				<form onSubmit={(e) => this.submitBookingForm(e, item)}>
-					<ul className={s.bookingForm}>
+					<ul className={classes.bookingForm}>
 
 						<li>
 							<BookingSelector onChange={this.callbackBookingPersons} data={item.prices_fields} addon={item.prices_addon} onRef={ref => (this.refBookingSelector = ref)}/>
@@ -145,13 +147,13 @@ class Tickets extends Component {
 	}
 
 	render() {
-		const {data, t} = this.props
+		const {classes, data, t} = this.props
 		const {expanded} = this.state;
 
 
 
 		return (
-			<div className={s.ticketsWrapper}>
+			<div className={classes.ticketsWrapper}>
 
 				<Typography variant="headline" gutterBottom>
 					{t('Tickets')}
@@ -166,10 +168,10 @@ class Tickets extends Component {
 						: false
 					return (
 						<ExpansionPanel key={index} expanded={expanded_default} defaultExpanded={expanded_default} onChange={this.handleChange(expanded_id)} classes={{
-							expanded: s.panelExpanded
+							expanded: classes.panelExpanded
 						}}>
 							<ExpansionPanelSummary expandIcon={<Icon>expand_more</Icon>}>
-								<ul className={s.ticketHeading}>
+								<ul className={classes.ticketHeading}>
 									<li>
 										{item.title}
 									</li>

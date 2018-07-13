@@ -58,7 +58,7 @@ class MenuGenerator extends React.Component {
 		}
 
 		return (
-			<List component="nav" subheader={<ListSubheader component="div" data-menu-label>{label}</ListSubheader>}>
+			<List component="nav" subheader={<ListSubheader component="div" data-menu-label>{t(label)}</ListSubheader>}>
 
 				{menu.map((item, index) => {
 					if (typeof item.submenu != 'undefined') {
@@ -114,7 +114,7 @@ class MenuGenerator extends React.Component {
 											{item.icon && <ListItemIcon>
 												<Icon>{item.icon}</Icon>
 											</ListItemIcon>}
-											<ListItemText primary={item.label}/>
+											<ListItemText primary={t(item.label)}/>
 										</ListItem>
 									</a></Link>
 								</div>
@@ -190,18 +190,18 @@ class MenuComponent extends React.Component {
 			}
 		];
 
-			return (
-				<div className={classes.leftMenu}>
+		return (
+			<div className={classes.leftMenu}>
 
-					<MenuGenerator data={menu_top} route='index' label="Menu" />
-					<Divider/>
-					{store.settings && <MenuGenerator data={store.settings.menu} route='catalog' label="Menu" />}
-					<Divider/>
-					<MenuGenerator data={menu_public} route='index' label="Menu" />
+				<MenuGenerator data={menu_top} route='index' label="Menu" />
+				<Divider/>
+			{store.settings && <MenuGenerator data={store.settings.menu} route='catalog' label="Catalog" />}
 
-				</div>
-			);
-		// }
+			</div>
+		);
+
+		// <Divider/>
+		// <MenuGenerator data={menu_public} route='index' label="Menu" />
 
 		return <Preloader/>
 	}

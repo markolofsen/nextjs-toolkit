@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 // import { withRouter } from 'react-router-dom'
 // import {connect} from 'react-redux';
 
@@ -12,11 +11,11 @@ import ReactPlayer from 'react-player';
 
 import PlayerControls from './playerControls';
 
-import theme from './theme.scss'
+import {withStyles} from '@material-ui/core/styles';
+import {styles} from './styles'
 
-const styles = {
-};
 
+@withStyles(styles)
 class Block extends Component {
 
     state = {
@@ -138,7 +137,7 @@ class Block extends Component {
                       }
                   }}
                   controls={true}
-                  className={theme.reactPlayer}
+                  className={classes.reactPlayer}
                   width='100%' height='100%'
                   url={url}
                   playing={playing}
@@ -176,7 +175,7 @@ class Block extends Component {
 }
 
 Block.propTypes = {
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Block);
+export default Block;
